@@ -18,6 +18,8 @@ const app = express();
 const port = 3000;
 const mongoURL = 'mongodb://localhost:27017/JobAtlas_database'
 
+const bodyParser = require('body-parser');
+var urlencodeParser = bodyParser.urlencoded({ extended: true });
 // ACTIVE L'ACCÈS AUX PAGES EJS
 app.set("view engine", "ejs");
 
@@ -81,6 +83,7 @@ app.get('/Connexion', (req, res) => {
 
 
 app.get('/Inscription', (req, res) => {
+    console.log("le get se fait")
     res.render("Inscription");
 });
 
@@ -90,10 +93,8 @@ app.get('/Profil', (req, res) => {
 
 
 /*RÉSULTATS ENVOYÉS PAR LES PAGES (POST) */
-app.post('/login', async (req, res) => {
-    var receivedData=req.body;
-    
-
+app.post('/Inscription',urlencodeParser,(req, res) => {
+    console.log(req.body.id_employeur)
 
 
 });

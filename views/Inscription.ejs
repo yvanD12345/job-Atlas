@@ -13,14 +13,14 @@
 <!-- CSS only -->
 
 <body>
-    <form action="POST">
+    <form action="#" method="post" class="form" id="inscriptionFormulaire">
         <h1>INSCRIPTION</h1>
 
         <h3>Êtes vous un étudiant ou un employeur ?</h3>
         <input type="checkbox" id="Etudiant" name="Etudiant" value="Etudiant" onclick="estEtudiant()">
         <label for="Etudiant"> Je suis un étudiant</label><br>
         <input type="checkbox" id="Employeur" name="Employeur" value="Employeur" onclick="estEmployeur()">
-        <label for="vehicle2">Je suis un employeur</label><br>
+        <label for="Employeur">Je suis un employeur</label><br>
 
         <div id="champsEtudiant" style="display:none">
             <h3>Quel est votre ID d'étudiant? ?</h3>
@@ -59,7 +59,7 @@
             <h3>Veuillez saisir notre nouveau mot de passe une seconde fois</h3>
             <input type="password"  id="mdp_employeur_scndfois">
         </div>
-        <input type="submit" value="Je m'inscris !">
+        <input type="submit" value="Submit">
 
 
 
