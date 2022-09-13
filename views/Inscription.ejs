@@ -1,17 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inscription</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
 </head>
+<!-- CSS only -->
+
 <body>
     <form action="POST">
         <h1>INSCRIPTION</h1>
 
+        <h3>Êtes vous un étudiant ou un employeur ?</h3>
+        <input type="checkbox" id="Etudiant" name="Etudiant" value="Etudiant" onclick="estEtudiant()">
+        <label for="Etudiant"> Je suis un étudiant</label><br>
+        <input type="checkbox" id="Employeur" name="Employeur" value="Employeur" onclick="estEmployeur()">
+        <label for="vehicle2">Je suis un employeur</label><br>
+
+        <div id="champsEtudiant" style="display:none">
+            <h3>Quel est votre ID d'étudiant? ?</h3>
+            <input type="text" id="id_etudiant">
+            <h3>Veuillez charger votre CV sous format PDF </h3>
+            <input type="file" accept="application/pdf" id="cv">
+            <h3>Quel est votre prénom ?</h3>
+            <input type="text" id="prenom_etudiant">
+            <h3>Quel est votre nom ?</h3>
+            <input type="text" id="nom_etudiant">
+            <h3>Quel est votre date de naissance ?</h3>
+            <input type="date" id="date_naissance_etudiant">
+
+            
+            <h3>Veuillez saisir votre courriel</h3>
+            <input type="text" id="email_etudiant">
+            <h3>Veuillez saisir un mot de passe</h3>
+            <input type="password" id="mdp_etudiant">
+            <h3>Veuillez saisir notre nouveau mot de passe une seconde fois</h3>
+            <input type="password"  id="mdp_etudiant_scndfois">
+        </div>
+
+
+        <div id="champsEntreprise" style="display:none">
+            <h3>Quel est votre ID d'entreprise? ?</h3>
+            <input type="text" id="id_employeur">
+            <h3>Quel est le nom de votre entreprise? </h3>
+            <input type="text" id="nom_employeur">
+            <h3>Quel est votre nom en tant que recruteur ?</h3>
+            <input type="text" id="nom_recruteur">
+
+            <h3>Veuillez saisir votre courriel</h3>
+            <input type="text" id="email_employeur">
+            <h3>Veuillez saisir un mot de passe</h3>
+            <input type="password" id="mdp_employeur">
+            <h3>Veuillez saisir notre nouveau mot de passe une seconde fois</h3>
+            <input type="password"  id="mdp_employeur_scndfois">
+        </div>
+        <input type="submit" value="Je m'inscris !">
+
+
+
+
 
 
     </form>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+    <script>
+        function estEmployeur() {
+            document.getElementById("Etudiant").checked = false
+            document.getElementById("champsEtudiant").style.display = "none";
+            document.getElementById("champsEntreprise").style.display = "block";
+        }
+        function estEtudiant() {
+            document.getElementById("Employeur").checked = false
+            document.getElementById("champsEntreprise").style.display = "none";
+            document.getElementById("champsEtudiant").style.display = "block";
+        }
+    </script>
+
+
 </body>
+
 </html>
