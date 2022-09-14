@@ -14,15 +14,16 @@ const passport = require('passport')
 //permet de pouvoir utiliser des variables d'environnement en l'occurence celles contenu dans env
 require("dotenv").config();
 /* DÉCLARATION DES MODULES */
-const CVs = ('./models/CV');
-const Employeurs = ('./models/Employeur');
-const Etudiants = ('./models/Etudiant');
-const OffresEmploi = ('./models/Offre_emploi');
+const CVs = require('./models/CV');
+const Employeurs = require('./models/Employeur');
+const Etudiants = require('./models/Etudiant');
+const OffresEmploi = require('./models/Offre_emploi');
 
 /* DÉCLARATION DE VARIABLES */
 const app = express();
 const port = 3000;
 const mongoURL = 'mongodb://localhost:27017/JobAtlas_database'
+//mongodb://localhost:27017/JobAtlas_database
 
 
 var urlencodeParser = bodyParser.urlencoded({ extended: true });
@@ -106,12 +107,12 @@ app.post('/Inscription', urlencodeParser, (req, res) => {
         console.log("C'est un etudiant")
         typeUser = "etud"
         creationProfilEtudiant(req.body.id_etudiant, req.body.prenom_etudiant, req.body.nom_etudiant, req.body.date_naissance_etudiant, req.body.email_etudiant, req.body.mdp_etudiant, req.body.mdp_etudiant_scndfois);
-        console.log("Un nouvel étudiant a été créé")
+ 
     } else if (req.body.EmployeurCheckBox=="Employeur") {
         console.log("C'est un employé")
         typeUser = "emp"
         creationProfilEmployeur(req.body.id_employeur, req.body.nom_employeur, req.body.nom_recruteur, req.body.email_employeur, req.body.mdp_employeur, req.body.mdp_employeur_scndfois)
-        console.log("Un nouvel employé a été créé")
+        
     }
 
 
@@ -120,22 +121,15 @@ app.post('/Inscription', urlencodeParser, (req, res) => {
 
 // Connexion à MongoDB
 
-mongoose.connect(mongoURL, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
+mongoose.connect(mongoURL, (err) =>{
+
+    if(!err) console.log('db connected');
+    else console.log('db error');
 })
-    //UNE FOIS LA CONNEXION AVEC LA BD ÉTABLIE, LE SERVEUR LISTEN
-    .then(() => {
-
-        app.listen(port, () => {
-
-            console.log("listening on port 3000");
-
-        });
-
-    });
 
 
+
+app.listen(port, () => {console.log("listening on port 3000")});
 
 /* FONCTIONS UTILISÉES */
 function creationProfilEtudiant(Id_etudiant, Prenom, Nom_famille, Age, Password) {
@@ -146,12 +140,28 @@ function creationProfilEtudiant(Id_etudiant, Prenom, Nom_famille, Age, Password)
         Id_etudiant: Id_etudiant,
         Prenom: Prenom,
         Nom_famille: Nom_famille,
-        Age: Age,
+        Age: determinationAgeDateNaissance(Age),
         Password: Password
 
     }, function (err) {
         if (err) throw err;
     })
+    console.log("Un nouvel étudiant a été créé")
+}
+
+function parseDate(input) {
+    var parts = input.match(/(\d+)/g);
+    // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+    return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
+  }
+function determinationAgeDateNaissance(dateNaissance){
+    dateNaissance=parseDate(dateNaissance)
+    var ageDifference = Date.now() - dateNaissance.getTime();
+    var ageDate = new Date(ageDifference);
+    var ageEtudiant=Math.abs(ageDate.getUTCFullYear() - 1970);
+    console.log(ageEtudiant)
+    return ageEtudiant
+
 }
 
 function creationProfilEmployeur(Id_entreprise, Nom_entreprise, Nom_recruteur, Email, Password) {
@@ -167,4 +177,5 @@ function creationProfilEmployeur(Id_entreprise, Nom_entreprise, Nom_recruteur, E
     }, function (err) {
         if (err) throw err;
     })
+    console.log("Un nouvel employeur a été créé")
 }

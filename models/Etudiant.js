@@ -1,15 +1,16 @@
-const mongoose = require('./db.js');
+const mongoose = require('mongoose');
 const Etduiantschema = new mongoose.Schema({
     Id_etudiant: Number,
 	Prenom: String,
 	Nom_famille: String,
     Age:Number,
 	Email: String,
-	Password: {
-		type: String, set(val) {
-			return require('bcrypt').hashSync(val, 10)
-		}
-	},
+	Password: String 
+	// {
+	// 	type: String, set(val) {
+	// 		return require('bcrypt').hashSync(val, 10)
+	// 	}
+	// },
 
 })
 
