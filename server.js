@@ -12,7 +12,6 @@ const passport = require('passport')
 //permet de pouvoir utiliser des variables d'environnement en l'occurence celles contenu dans env
 require("dotenv").config();
 
-const methodeOverride = require('method-override')
 /* DÉCLARATION DE VARIABLES */
 const app=express();
 const port=3000;
@@ -61,7 +60,7 @@ tels que put or delete là ou certain user pourrait
 ne pas le supporter ca aide notament pour la deconnexion 
 d'un user
 */
-app.use(methodeOverride('_method'))
+
 
 
 
