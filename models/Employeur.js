@@ -1,5 +1,5 @@
 const mongoose = require('./db.js');
-const schema = new mongoose.Schema({
+const EmployeurSchema = new mongoose.Schema({
     Id_entreprise: Number,
 	Nom_entreprise: String,
 	Nom_recruteur: String,
@@ -14,6 +14,6 @@ const schema = new mongoose.Schema({
 
 
 // pour l'acces dans les autres fichiers
-const Employeurs = mongoose.model('Employeurs', schema);
+const Employeurs = mongoose.model('Employeurs', EmployeurSchema);
 
 module.exports=Employeurs

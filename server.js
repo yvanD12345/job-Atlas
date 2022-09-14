@@ -3,6 +3,8 @@
 const express = require('express');
 const mongoose = require('mongoose')
 const flash = require('express')
+const methodeOverride = require('method-override')
+const bodyParser = require('body-parser');
 //GESTION DE SESSION
 const session = require('express-session')
 //ENCRYPTAGE DES MOTS DE PASSE
@@ -11,14 +13,18 @@ const bcrypt = require('bcryptjs')
 const passport = require('passport')
 //permet de pouvoir utiliser des variables d'environnement en l'occurence celles contenu dans env
 require("dotenv").config();
+/* DÉCLARATION DES MODULES */
+const CVs = ('./models/CV');
+const Employeurs = ('./models/Employeur');
+const Etudiants = ('./models/Etudiant');
+const OffresEmploi = ('./models/Offre_emploi');
 
-const methodeOverride = require('method-override')
 /* DÉCLARATION DE VARIABLES */
 const app = express();
 const port = 3000;
 const mongoURL = 'mongodb://localhost:27017/JobAtlas_database'
 
-const bodyParser = require('body-parser');
+
 var urlencodeParser = bodyParser.urlencoded({ extended: true });
 // ACTIVE L'ACCÈS AUX PAGES EJS
 app.set("view engine", "ejs");
@@ -93,8 +99,20 @@ app.get('/Profil', (req, res) => {
 
 
 /*RÉSULTATS ENVOYÉS PAR LES PAGES (POST) */
-app.post('/Inscription',urlencodeParser,(req, res) => {
-    console.log(req.body.id_employeur)
+app.post('/Inscription', urlencodeParser, (req, res) => {
+    var typeUser;
+
+    if (req.body.EtudiantCheckBox=="Etudiant") {
+        console.log("C'est un etudiant")
+        typeUser = "etud"
+        creationProfilEtudiant(req.body.id_etudiant, req.body.prenom_etudiant, req.body.nom_etudiant, req.body.date_naissance_etudiant, req.body.email_etudiant, req.body.mdp_etudiant, req.body.mdp_etudiant_scndfois);
+        console.log("Un nouvel étudiant a été créé")
+    } else if (req.body.EmployeurCheckBox=="Employeur") {
+        console.log("C'est un employé")
+        typeUser = "emp"
+        creationProfilEmployeur(req.body.id_employeur, req.body.nom_employeur, req.body.nom_recruteur, req.body.email_employeur, req.body.mdp_employeur, req.body.mdp_employeur_scndfois)
+        console.log("Un nouvel employé a été créé")
+    }
 
 
 });
@@ -119,3 +137,34 @@ mongoose.connect(mongoURL, {
 
 
 
+/* FONCTIONS UTILISÉES */
+function creationProfilEtudiant(Id_etudiant, Prenom, Nom_famille, Age, Password) {
+
+    var nouvelEtudiant={Id_etudiant:Id_etudiant,Prenom:Prenom,Nom_famille:Nom_famille, Age:Age, Password:Password };
+    console.log(nouvelEtudiant)
+    Etudiants.create({
+        Id_etudiant: Id_etudiant,
+        Prenom: Prenom,
+        Nom_famille: Nom_famille,
+        Age: Age,
+        Password: Password
+
+    }, function (err) {
+        if (err) throw err;
+    })
+}
+
+function creationProfilEmployeur(Id_entreprise, Nom_entreprise, Nom_recruteur, Email, Password) {
+    var nouvelEmployeur={Id_entreprise:Id_entreprise, Nom_entreprise:Nom_entreprise, Nom_recruteur:Nom_recruteur, Email:Email, Password:Password}
+    console.log(nouvelEmployeur)
+    Employeurs.create({
+        Id_entreprise: Id_entreprise,
+        Nom_entreprise: Nom_entreprise,
+        Nom_recruteur: Nom_recruteur,
+        Email: Email,
+        Password: Password
+
+    }, function (err) {
+        if (err) throw err;
+    })
+}

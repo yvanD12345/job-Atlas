@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
 
 </head>
 <!-- CSS only -->
@@ -17,49 +16,49 @@
         <h1>INSCRIPTION</h1>
 
         <h3>Êtes vous un étudiant ou un employeur ?</h3>
-        <input type="checkbox" id="Etudiant" name="Etudiant" value="Etudiant" onclick="estEtudiant()">
+        <input type="checkbox" id="Etudiant" name="EtudiantCheckBox" value="Etudiant" onclick="estEtudiant()">
         <label for="Etudiant"> Je suis un étudiant</label><br>
-        <input type="checkbox" id="Employeur" name="Employeur" value="Employeur" onclick="estEmployeur()">
+        <input type="checkbox" id="Employeur" name="EmployeurCheckBox" value="Employeur" onclick="estEmployeur()">
         <label for="Employeur">Je suis un employeur</label><br>
 
         <div id="champsEtudiant" style="display:none">
             <h3>Quel est votre ID d'étudiant? ?</h3>
-            <input type="text" id="id_etudiant">
+            <input type="text" id="id_etudiant" name="id_etudiant">
             <h3>Veuillez charger votre CV sous format PDF </h3>
             <input type="file" accept="application/pdf" id="cv">
             <h3>Quel est votre prénom ?</h3>
-            <input type="text" id="prenom_etudiant">
+            <input type="text" id="prenom_etudiant" name="prenom_etudiant">
             <h3>Quel est votre nom ?</h3>
-            <input type="text" id="nom_etudiant">
+            <input type="text" id="nom_etudiant" name="nom_etudiant">
             <h3>Quel est votre date de naissance ?</h3>
-            <input type="date" id="date_naissance_etudiant">
+            <input type="date" id="date_naissance_etudiant" name="date_naissance_etudiant">
 
             
             <h3>Veuillez saisir votre courriel</h3>
-            <input type="text" id="email_etudiant">
+            <input type="text" id="email_etudiant" name="email_etudiant">
             <h3>Veuillez saisir un mot de passe</h3>
-            <input type="password" id="mdp_etudiant">
+            <input type="password" id="mdp_etudiant" name="mdp_etudiant">
             <h3>Veuillez saisir notre nouveau mot de passe une seconde fois</h3>
-            <input type="password"  id="mdp_etudiant_scndfois">
+            <input type="password"  id="mdp_etudiant_scndfois" name="mdp_etudiant_scndfois">
         </div>
 
 
         <div id="champsEntreprise" style="display:none">
             <h3>Quel est votre ID d'entreprise? ?</h3>
-            <input type="text" id="id_employeur">
+            <input type="text" id="id_employeur" name="id_employeur">
             <h3>Quel est le nom de votre entreprise? </h3>
-            <input type="text" id="nom_employeur">
+            <input type="text" id="nom_employeur" name="nom_employeur">
             <h3>Quel est votre nom en tant que recruteur ?</h3>
-            <input type="text" id="nom_recruteur">
+            <input type="text" id="nom_recruteur"name="nom_recruteur">
 
             <h3>Veuillez saisir votre courriel</h3>
-            <input type="text" id="email_employeur">
+            <input type="text" id="email_employeur" name="email_employeur">
             <h3>Veuillez saisir un mot de passe</h3>
-            <input type="password" id="mdp_employeur">
+            <input type="password" id="mdp_employeur" name="mdp_employeur">
             <h3>Veuillez saisir notre nouveau mot de passe une seconde fois</h3>
-            <input type="password"  id="mdp_employeur_scndfois">
+            <input type="password"  id="mdp_employeur_scndfois" name="mdp_employeur_scndfois">
         </div>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Je m'inscris !">
 
 
 
@@ -67,10 +66,7 @@
 
 
     </form>
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-        crossorigin="anonymous"></script>
+    <!-- Fonctions JavaScript -->
     <script>
         function estEmployeur() {
             document.getElementById("Etudiant").checked = false
