@@ -69,7 +69,7 @@ tels que put or delete là ou certain user pourrait
 ne pas le supporter ca aide notament pour la deconnexion 
 d'un user
 */
-app.use(methodeOverride('_method'))
+
 
 
 
