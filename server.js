@@ -159,7 +159,7 @@ function determinationAgeDateNaissance(dateNaissance){
     var ageDifference = Date.now() - dateNaissance.getTime();
     var ageDate = new Date(ageDifference);
     var ageEtudiant=Math.abs(ageDate.getUTCFullYear() - 1970);
-    console.log(ageEtudiant)
+    console.log("L'âge est de "+ageEtudiant)
     return ageEtudiant
 
 }
