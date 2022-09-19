@@ -117,12 +117,9 @@ d'un user
 */
 app.use(methodeOverride('_method'));
 
-
-
 app.get('/',(req,res)=> res.render("homePage"));
-
 app.get('/Connexion',checkNotAuthenticated,(req,res)=> res.render("Connexion"));
-app.get('/Inscription',checkNotAuthenticated,(req,res)=> res.render("Inscription"));
+app.get('/Register',checkNotAuthenticated,(req,res)=> res.render("Inscription"));
 app.get('/Profil',checkAuthenticated,(req,res)=>res.render('Profil'));
 
 
@@ -195,7 +192,7 @@ app.delete('/logout',(req,res)=>{
 
 
 /*RÉSULTATS ENVOYÉS PAR LES PAGES (POST) */
-app.post('/Inscription', checkNotAuthenticated, (req, res) => {
+app.post('/Register', checkNotAuthenticated, (req, res) => {
     var typeUser;
 
     if (req.body.EtudiantCheckBox=="Etudiant") {
