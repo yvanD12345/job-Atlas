@@ -88,8 +88,8 @@ app.get('/Connexion', (req, res) => {
     res.render("Connexion");
 });
 
-app.get('/header2', (req, res) => {
-    res.render("header2");
+app.get('/header', (req, res) => {
+    res.render("header");
 });
 
 app.get('/Inscription', (req, res) => {
