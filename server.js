@@ -20,7 +20,8 @@ const employeurs = require('./models/employeurs');
 //importer le schema de tous type de users sur le site 
 const users = require('./models/users');
 //importer le schema de tous les etudiants sur le site 
-const etudiants = require('./models/etudiants');
+const etudiants = require('./models/etudiants')
+
 
 //permet de pouvoir utiliser des variables d'environnement en l'occurence celles contenu dans env
 require("dotenv").config();
@@ -50,6 +51,7 @@ const {
     checkNotAuthenticated,
 }= require("./middlewares/auth");
 const user = require('./models/users');
+const bodyParser = require('body-parser');
 
 //SERS À INITIALISER LE PASSPORT
 /*chaque fois qu'un utilisateur tentera de se connecter cette methode va prendre le 
@@ -193,7 +195,7 @@ app.delete('/logout',(req,res)=>{
 
 
 /*RÉSULTATS ENVOYÉS PAR LES PAGES (POST) */
-app.post('/Inscription', checkNotAuthenticated, urlencodeParser, (req, res) => {
+app.post('/Inscription', checkNotAuthenticated, (req, res) => {
     var typeUser;
 
     if (req.body.EtudiantCheckBox=="Etudiant") {
