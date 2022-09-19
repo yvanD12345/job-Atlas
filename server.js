@@ -1,6 +1,5 @@
 /* IMPORT DES MODULES */
 const express = require('express');
-
 //AUTHENTIFIER REQUÊTE
 const passport = require('passport');
 
@@ -25,6 +24,9 @@ const etudiants = require('./models/etudiants');
 
 //permet de pouvoir utiliser des variables d'environnement en l'occurence celles contenu dans env
 require("dotenv").config();
+/* DÉCLARATION DES MODULES */
+const CVs = require('./models/CV');
+const OffresEmploi = require('./models/Offre_emploi');
 
 
 connection();
@@ -171,6 +173,9 @@ async function saveUserLogged(req,res,next){
  }
  next();
 }
+app.get('/header', (req, res) => {
+    res.render("header");
+});
 
 app.post('/Connexion',saveUserLogged,passport.authenticate('local',{
     successRedirect:'/Profil',
