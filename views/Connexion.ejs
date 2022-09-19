@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <% if (messages.error) { %>
+        <%= messages.error %>
+        <% } %>
+<body>
+<form class = "register" action="/connexion" method="POST">
+
+    <div class = "form setup">
+        <input type="email" class = "login-input" name = "email" placeholder="email" id="champ1" 
+        onkeyup = "verifierchamp()"/>
+    </div>
+    <div class="form setup">
+        <input type="password" class="login-input" name="password" placeholder="password" id="champ2"
+        onkeyup="verifierchamp()"/>
+    </div>
+    <div class = "form setup">
+        <button type="submit" id= "buttonB"  disabled>connexion</button>
+    </div>
+    <div class="form-control">
+        <a class="password-forgotten" href="/resetPassword">Mot de passe oublié ?</a>
+
+    </div>
+</form>
+<a href="inscription">vous n'avez pas de compte</a>
+<script>
+    function verifierchamp(){
+        if(champ1.value.length > 0 && champ2.value.length > 0){
+        document.getElementById("buttonB").disabled = false;
+        }
+        else {
+            document.getElementById("buttonB").disabled = true;
+        }
+    }
+</script>
+</body>
+</html>
