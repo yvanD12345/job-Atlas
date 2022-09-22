@@ -10,6 +10,7 @@ const flash = require('express-flash');
 const session = require("express-session");
 const initializePassport = require("./passport_config");
 const methodeOverride = require('method-override');
+<<<<<<< Updated upstream
 /*IMPORT DES SCHEMAS*/
 const employeurs = require('./models/Employeur');
 const users = require('./models/User');
@@ -21,14 +22,41 @@ require("dotenv").config();
 const bodyParser = require('body-parser');
 //user présentement connecté
 let userCurrentlyLogged = null;
+=======
+
+//importer le schema des employers sur le site 
+const employeurs = require('./models/employeurs');
+//importer le schema de tous type de users sur le site 
+const users = require('./models/users');
+//importer le schema de tous les etudiants sur le site 
+const etudiants = require('./models/etudiants');
+
+const PDFService = require('./service/pdf-service');
+
+const http = require('http');
+
+
+//permet de pouvoir utiliser des variables d'environnement en l'occurence celles contenu dans env
+require("dotenv").config();
+/* DÉCLARATION DES MODULES */
+const Cvs = require('./models/cvs');
+const OffresEmploi = require('./models/Offre_emploi');
+>>>>>>> Stashed changes
 
 
 connection();
 
 
 
+<<<<<<< Updated upstream
 
 
+=======
+const titreSite = "JobAtlas";
+const app = express();
+//user présentement connecté
+let userCurrentlyLogged= null;
+>>>>>>> Stashed changes
 
 //CHECKAUTHENTICATED FAIT EN SORTE QUE L'ACTION GET OU SET N'EST FAISABLE QUE SI UN USER CONNECTER
 /*EX: verifier si un utilisateur est connecter avec d'authoriser l'acces a la page Profil
@@ -106,6 +134,7 @@ d'un user
 */
 app.use(methodeOverride('_method'));
 
+<<<<<<< Updated upstream
 app.get('/', (req, res) => res.render("Accueil"));
 app.get('/Connexion', checkNotAuthenticated, (req, res) => res.render("Connexion"));
 app.get('/Inscription', checkNotAuthenticated, (req, res) => res.render("Inscription"));
@@ -127,7 +156,31 @@ app.get("/Accueil", checkNotAuthenticated, (req, res) => {
         //  checkCvs: checkifCvsIsNull,
 
     });
+=======
+app.get('/',checkAuthenticated,(req,res)=> res.render("Profil"));
+app.get('/Connexion',checkNotAuthenticated,(req,res)=> res.render("Connexion"));
+app.get('/Register',checkNotAuthenticated,(req,res)=> res.render("Inscription"));
+app.get('/creationcv',checkAuthenticated,(req,res)=>res.render('creationcv'));
+
+
+app.get("/homepage",checkNotAuthenticated,(req,res)=>{
+
+        //    const checkifCvsIsNull = true;
+            res.render("homepage", {
+                titrePage: titreSite,
+                titreSite: titreSite,
+              /*  name: userCurrentlyLogged.first_name +
+                    " " +
+                    userCurrentlyLogged.last_name,
+                    */
+                ConnectedUser: userCurrentlyLogged,
+               // user_Cvs: Cvs,
+              //  checkCvs: checkifCvsIsNull,
+            
+        });
+>>>>>>> Stashed changes
 });
+
 //PERMET DE DETERMINER QUI EST L'UTILISATEUR QUI EST PRÉSENTEMENT CONNECTER QUAND LE USER FAIT UN LOGIN
 /*on store tous les user dans la bd user afin de faciliter la connection
 une fois le user est connecter en tant que user on initialise la variarible usercurrentlylogged
@@ -153,6 +206,7 @@ async function saveUserLogged(req, res, next) {
         }
     }
 }
+<<<<<<< Updated upstream
 /*ACCÈS AUX PAGES (GET) */
 app.get('/', (req, res) => {
     res.render("Accueil");
@@ -167,6 +221,107 @@ app.post('/Connexion', saveUserLogged, passport.authenticate('local', {
 
 /*RÉSULTATS ENVOYÉS PAR LES PAGES (POST) */
 app.post('/Inscription', checkNotAuthenticated, (req, res) => {
+=======
+
+app.get('/Profil',checkAuthenticated,(req,res)=>{
+   
+    if(userCurrentlyLogged.user_type == "etudiant"){
+
+        Cvs.find({user_id:userCurrentlyLogged._id},function(err,Cvs){
+            if(Cvs == null){
+                const checkifCvsIsNull = true;
+                res.render("Profil", {
+                    titrePage: titreSite,
+                    titreSite: titreSite,
+                    name: userCurrentlyLogged.first_name +
+                        " " +
+                        userCurrentlyLogged.last_name,
+                    ConnectedUser: userCurrentlyLogged,
+                    user_Cvs: Cvs,
+                    checkCvs: checkifCvsIsNull,
+                
+            });
+        }
+        else{
+            const checkifCvsIsNull = false;
+            res.render("Profil", {
+                titrePage: titreSite,
+                titreSite: titreSite,
+                name: userCurrentlyLogged.first_name +
+                    " " +
+                    userCurrentlyLogged.last_name,
+                ConnectedUser: userCurrentlyLogged,
+                user_Cvs: Cvs,
+            
+                checkCvs: checkifCvsIsNull,
+            
+        });
+        }
+    
+    });
+    }else if(userCurrentlyLogged.user_type == "employeur"){
+        res.render("Profil",{
+            titrePage: titreSite,
+            titreSite: titreSite,
+            name: userCurrentlyLogged.Nom_entreprise,
+            ConnectedUser: userCurrentlyLogged,
+        
+
+        })
+
+    }
+
+
+});
+
+app.get('/header', (req, res) => {
+    res.render("header");
+});
+
+app.post('/Connexion',saveUserLogged,passport.authenticate('local',{
+    successRedirect:'/Profil',
+    failureRedirect:'Connexion',
+    failureFlash:true
+}))
+
+
+
+app.post("/creationcv",checkAuthenticated,
+async(req,res) =>{  Cvs.create({
+    first_name: req.body.firstname,
+    last_name: req.body.lastname,
+    email: req.body.email,
+    user_id: userCurrentlyLogged._id,
+    title:"test",
+
+});
+res.redirect('/');
+});
+app.post("/afficherCv",checkAuthenticated,async(req,res)=>{
+    const cvSelected = Cvs.findOne(req.body.cv_selected);
+    console.log(cvSelected.title);
+    if(cvSelected){
+        console.log("cmoi wsh");
+        PDFService.createCv(cvSelected,res);
+    }
+});
+
+
+
+app.delete('/logout',(req,res)=>{
+    userCurrentlyLogged = null;
+    req.logout(req.user, err => {
+      if(err) return next(err);
+      res.redirect("/");
+
+})
+
+
+/*RÉSULTATS ENVOYÉS PAR LES PAGES (POST) */
+//Wafi quand tu va faire inscription ajoute dans la bd user le password l'email et le type de l'etudiant qui sera creer jl deja fait pour 
+//Employeur. La bd user rend la connexion plus simple merci. si tu va dans creer emplooyeur j'ai fait un exemple tu px juste copy coller
+app.post('/Register', checkNotAuthenticated, (req, res) => {
+>>>>>>> Stashed changes
     var typeUser;
 
     if (req.body.EtudiantCheckBox == "Etudiant") {
@@ -192,12 +347,15 @@ app.delete('/logout', (req, res) => {
 
     })
 
+<<<<<<< Updated upstream
 });
 
 
+=======
+>>>>>>> Stashed changes
 /* FONCTIONS UTILISÉES */
 function creationProfilEtudiant(Id_etudiant, Prenom, Nom_famille, Age, Password) {
-
+    
     var nouvelEtudiant={Id_etudiant:Id_etudiant,Prenom:Prenom,Nom_famille:Nom_famille, Age:Age, Password:Password };
     console.log(nouvelEtudiant)
     etudiants.create({
@@ -243,5 +401,21 @@ function creationProfilEmployeur(Id_entreprise, Nom_entreprise, Nom_recruteur, E
     })
     console.log("Un nouvel employeur a été créé")
 }
+<<<<<<< Updated upstream
+=======
+/*
+function loggedin(req,res,next){
+     if(req.user){
+        next();
+     }else{
+        res.redirect('/Connexion');
+     }
+     
+}
+*/
+});
+
+})
+>>>>>>> Stashed changes
 app.listen(3000);
 
