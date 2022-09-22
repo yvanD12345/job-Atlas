@@ -180,7 +180,7 @@ app.post('/Inscription', checkNotAuthenticated, (req, res) => {
         creationProfilEmployeur(req.body.id_employeur, req.body.nom_employeur, req.body.nom_recruteur, req.body.email_employeur, req.body.mdp_employeur, req.body.mdp_employeur_scndfois)
 
     }
-}
+});
 
 
 app.delete('/logout', (req, res) => {
@@ -191,11 +191,6 @@ app.delete('/logout', (req, res) => {
 
     })
 
-}
-
-
-
-
-      
+});
 
 app.listen(3000);
