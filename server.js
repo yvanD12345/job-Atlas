@@ -106,27 +106,27 @@ d'un user
 */
 app.use(methodeOverride('_method'));
 
-app.get('/', (req, res) => res.render("Accueil"));
-app.get('/Connexion', checkNotAuthenticated, (req, res) => res.render("Connexion"));
-app.get('/Inscription', checkNotAuthenticated, (req, res) => res.render("Inscription"));
-app.get('/Profil', checkAuthenticated, (req, res) => res.render('Profil'));
+app.get('/',checkAuthenticated,(req,res)=> res.render("Profil"));
+app.get('/Connexion',checkNotAuthenticated,(req,res)=> res.render("Connexion"));
+app.get('/Register',checkNotAuthenticated,(req,res)=> res.render("Inscription"));
+app.get('/creationcv',checkAuthenticated,(req,res)=>res.render('creationcv'));
 
 
-app.get("/Accueil", checkNotAuthenticated, (req, res) => {
+app.get("/homepage",checkNotAuthenticated,(req,res)=>{
 
-    //    const checkifCvsIsNull = true;
-    res.render("Accueil", {
-        titrePage: titreSite,
-        titreSite: titreSite,
-        /*  name: userCurrentlyLogged.first_name +
-              " " +
-              userCurrentlyLogged.last_name,
-              */
-        ConnectedUser: userCurrentlyLogged,
-        // user_Cvs: Cvs,
-        //  checkCvs: checkifCvsIsNull,
-
-    });
+        //    const checkifCvsIsNull = true;
+            res.render("homepage", {
+                titrePage: titreSite,
+                titreSite: titreSite,
+              /*  name: userCurrentlyLogged.first_name +
+                    " " +
+                    userCurrentlyLogged.last_name,
+                    */
+                ConnectedUser: userCurrentlyLogged,
+               // user_Cvs: Cvs,
+              //  checkCvs: checkifCvsIsNull,
+            
+        });
 });
 
 /*ACCÈS AUX PAGES (GET) */
@@ -252,4 +252,197 @@ async function saveUserLogged(req, res, next) {
         }
     }
 }
+
+/*ACCÈS AUX PAGES (GET) */
+app.get('/', (req, res) => {
+    res.render("Accueil");
+});
+
+app.post('/Connexion', saveUserLogged, passport.authenticate('local', {
+    successRedirect: '/Profil',
+    failureRedirect: 'Connexion',
+    failureFlash: true
+}));
+
+
+/*RÉSULTATS ENVOYÉS PAR LES PAGES (POST) */
+app.post('/Inscription', checkNotAuthenticated, (req, res) => {
+
+app.get('/Profil',checkAuthenticated,(req,res)=>{
+   
+    if(userCurrentlyLogged.user_type == "etudiant"){
+
+        Cvs.find({user_id:userCurrentlyLogged._id},function(err,Cvs){
+            if(Cvs == null){
+                const checkifCvsIsNull = true;
+                res.render("Profil", {
+                    titrePage: titreSite,
+                    titreSite: titreSite,
+                    name: userCurrentlyLogged.first_name +
+                        " " +
+                        userCurrentlyLogged.last_name,
+                    ConnectedUser: userCurrentlyLogged,
+                    user_Cvs: Cvs,
+                    checkCvs: checkifCvsIsNull,
+                
+            });
+        }
+        else{
+            const checkifCvsIsNull = false;
+            res.render("Profil", {
+                titrePage: titreSite,
+                titreSite: titreSite,
+                name: userCurrentlyLogged.first_name +
+                    " " +
+                    userCurrentlyLogged.last_name,
+                ConnectedUser: userCurrentlyLogged,
+                user_Cvs: Cvs,
+            
+                checkCvs: checkifCvsIsNull,
+            
+        });
+        }
+    
+    });
+    }else if(userCurrentlyLogged.user_type == "employeur"){
+        res.render("Profil",{
+            titrePage: titreSite,
+            titreSite: titreSite,
+            name: userCurrentlyLogged.Nom_entreprise,
+            ConnectedUser: userCurrentlyLogged,
+        
+
+        })
+
+    }
+
+
+});
+
+app.get('/header', (req, res) => {
+    res.render("header");
+});
+
+app.post('/Connexion',saveUserLogged,passport.authenticate('local',{
+    successRedirect:'/Profil',
+    failureRedirect:'Connexion',
+    failureFlash:true
+}))
+
+
+
+app.post("/creationcv",checkAuthenticated,
+async(req,res) =>{  Cvs.create({
+    first_name: req.body.firstname,
+    last_name: req.body.lastname,
+    email: req.body.email,
+    user_id: userCurrentlyLogged._id,
+    title:"test",
+
+});
+res.redirect('/');
+});
+app.post("/afficherCv",checkAuthenticated,async(req,res)=>{
+    const cvSelected = Cvs.findOne(req.body.cv_selected);
+    console.log(cvSelected.title);
+    if(cvSelected){
+        console.log("cmoi wsh");
+        PDFService.createCv(cvSelected,res);
+    }
+});
+
+
+
+app.delete('/logout',(req,res)=>{
+    userCurrentlyLogged = null;
+    req.logout(req.user, err => {
+      if(err) return next(err);
+      res.redirect("/");
+
+})
+
+
+/*RÉSULTATS ENVOYÉS PAR LES PAGES (POST) */
+//Wafi quand tu va faire inscription ajoute dans la bd user le password l'email et le type de l'etudiant qui sera creer jl deja fait pour 
+//Employeur. La bd user rend la connexion plus simple merci. si tu va dans creer emplooyeur j'ai fait un exemple tu px juste copy coller
+app.post('/Register', checkNotAuthenticated, (req, res) => {
+
+    var typeUser;
+
+    if (req.body.EtudiantCheckBox == "Etudiant") {
+        console.log("C'est un etudiant")
+        typeUser = "etud"
+        creationProfilEtudiant(req.body.id_etudiant, req.body.prenom_etudiant, req.body.nom_etudiant, req.body.date_naissance_etudiant, req.body.email_etudiant, req.body.mdp_etudiant, req.body.mdp_etudiant_scndfois);
+
+    } else if (req.body.EmployeurCheckBox == "Employeur") {
+        console.log("C'est un employé")
+        typeUser = "emp"
+        creationProfilEmployeur(req.body.id_employeur, req.body.nom_employeur, req.body.nom_recruteur, req.body.email_employeur, req.body.mdp_employeur, req.body.mdp_employeur_scndfois)
+    
+    }
+    res.redirect('/');
+});
+
+
+app.delete('/logout', (req, res) => {
+    userCurrentlyLogged = null;
+    req.logout(req.user, err => {
+        if (err) return next(err);
+        res.redirect("/");
+
+    })
+
+});
+
+
+/* FONCTIONS UTILISÉES */
+function creationProfilEtudiant(Id_etudiant, Prenom, Nom_famille, Age, Password) {
+    
+    var nouvelEtudiant={Id_etudiant:Id_etudiant,Prenom:Prenom,Nom_famille:Nom_famille, Age:Age, Password:Password };
+    console.log(nouvelEtudiant)
+    etudiants.create({
+        Id_etudiant: Id_etudiant,
+        Prenom: Prenom,
+        Nom_famille: Nom_famille,
+        Age: determinationAgeDateNaissance(Age),
+        Password: Password
+
+    }, function (err) {
+        if (err) throw err;
+    })
+    console.log("Un nouvel étudiant a été créé")
+}
+
+function parseDate(input) {
+    var parts = input.match(/(\d+)/g);
+    // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+    return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
+  }
+function determinationAgeDateNaissance(dateNaissance){
+    dateNaissance=parseDate(dateNaissance)
+    var ageDifference = Date.now() - dateNaissance.getTime();
+    var ageDate = new Date(ageDifference);
+    var ageEtudiant=Math.abs(ageDate.getUTCFullYear() - 1970);
+    console.log("L'âge est de "+ageEtudiant)
+    return ageEtudiant
+
+}
+
+function creationProfilEmployeur(Id_entreprise, Nom_entreprise, Nom_recruteur, Email, Password) {
+    var nouvelEmployeur={Id_entreprise:Id_entreprise, Nom_entreprise:Nom_entreprise, Nom_recruteur:Nom_recruteur, Email:Email, Password:Password}
+    console.log(nouvelEmployeur)
+    employeurs.create({
+        Id_entreprise: Id_entreprise,
+        Nom_entreprise: Nom_entreprise,
+        Nom_recruteur: Nom_recruteur,
+        email: Email,
+        password: Password
+
+    }, function (err) {
+        if (err) throw err;
+    })
+    console.log("Un nouvel employeur a été créé")
+}
+
 app.listen(3000);
+

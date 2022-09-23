@@ -1,13 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<html lang="fr">
+
+
+<form action="/logout?_method=DELETE" method="POST">
+
+ <button type="submit">Log out</button>
+ 
+ </form>
+ <% if(ConnectedUser.user_type == "etudiant"){ %>
+ <form action="afficherCv" method="POST">
     
-    <h1>allo</h1>
-</body>
+    <% if( checkCvs == false){ %>
+        <div class="form-control">
+            <label for="cv ">choissisez un cv : </label>
+            <select id="champ1" name="cv_selected"onkeyup="verifierChamp()">
+                <% user_Cvs.forEach(function(item,index){%>
+                    <option value="<%=item.user_id %>" on>
+                        <%= item.title %>
+                    </option>
+                    <%}); %>
+            </select>
+        </div>
+        <%}; %>
+        <button class="submit" submit_id="buttonA">send</button>
+ </form>
+ <%}; %>
+ <a href="creationCv">creer un cv</a>
+ <script>
+ function verifierchamp(){
+        if(champ1.value.length > 0 ){
+        document.getElementById("buttonA").disabled = false;
+        }
+        else {
+            document.getElementById("buttonA").disabled = true;
+        }
+    }
+ </script>
+
 </html>
