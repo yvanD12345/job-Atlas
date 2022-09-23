@@ -19,6 +19,8 @@ function initializeE(passport, getUserByEmail, getUserByID) {
 				});
 			}
 		} catch (err) {
+			
+			console.log("connexion success");
 			return done(e);
 		}
 	};
@@ -28,6 +30,7 @@ function initializeE(passport, getUserByEmail, getUserByID) {
 	);
 	passport.serializeUser((user, done) => done(null, user.id));
 	passport.deserializeUser(async (id, done) => {
+		console.log("id all good");
 		return done(null, await id);
 	});
 }

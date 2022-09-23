@@ -7,15 +7,15 @@
  <button type="submit">Log out</button>
  
  </form>
+ <p class="title">bonjour,<%= name %></p>
  <% if(ConnectedUser.user_type == "etudiant"){ %>
  <form action="afficherCv" method="POST">
-    
     <% if( checkCvs == false){ %>
         <div class="form-control">
-            <label for="cv ">choissisez un cv : </label>
+            <label for="cv ">choissisez un cv a afficher: </label>
             <select id="champ1" name="cv_selected"onkeyup="verifierChamp()">
                 <% user_Cvs.forEach(function(item,index){%>
-                    <option value="<%=item.user_id %>" on>
+                    <option value="<%=item.title %>" on>
                         <%= item.title %>
                     </option>
                     <%}); %>

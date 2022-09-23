@@ -2,10 +2,7 @@
 
 const mongoose = require('mongoose');
 const schema = new mongoose.Schema ({
-	cv_id:{
-		type: String,
-		required: true,
-	},
+	
     first_name: {
 		type: String,
 		required: true,
