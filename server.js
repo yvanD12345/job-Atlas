@@ -16,6 +16,7 @@ const users = require('./models/User');
 const cvs = require('./models/cvs')
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
+const pdfService = require('./service/pdf-service');
 const etudiants = require('./models/Etudiant')
 const profilPro = require('./models/ProfilPro')
 const OffreEmploi = require('./models/Offre_emploi');
@@ -114,6 +115,7 @@ app.get('/Connexion', checkNotAuthenticated, (req, res) => res.render('Connexion
 app.get('/Inscription', checkNotAuthenticated, (req, res) => res.render('Inscription'));
 app.get('/Acceuil',checkNotAuthenticated,(req,res)=> res.render('Acceuil'));
 app.get('/creationcv',checkAuthenticated,(req,res) => res.render('creationcv'));
+app.get('/affichercv',checkAuthenticated,(req,res) => res.render('/'));
 
 //PERMET DE DETERMINER QUI EST L'UTILISATEUR QUI EST PRÉSENTEMENT CONNECTER QUAND LE USER FAIT UN LOGIN
 /*on store tous les user dans la bd user afin de faciliter la connection
@@ -145,15 +147,16 @@ async function saveUserLogged(req, res, next) {
 app.get('/',checkAuthenticated,(req, res) => {
     cvs.find({ user_id: userCurrentlyLogged._id }, async function (err, Cvs) {
         if(userCurrentlyLogged.user_type == "etudiant"){
-        
+        //Cvs contiendra tous les cv que le user a deja fait 
         if (Cvs == null) {
+            //bool qui determine si oui ou non il en a deja fait 
                checkifCvsIsNull = true;
             res.render("Profil", {
                 titrePage: titreSite,
                 titreSite: titreSite,
-                name: userCurrentlyLogged.first_name +
+                name: userCurrentlyLogged.Nom_famille +
                     " " +
-                    userCurrentlyLogged.last_name,
+                    userCurrentlyLogged.Prenom,
                 ConnectedUser: userCurrentlyLogged,
                 user_Cvs: Cvs,
                 checkCvs: checkifCvsIsNull,
@@ -164,9 +167,9 @@ app.get('/',checkAuthenticated,(req, res) => {
             res.render("Profil", {
                 titrePage: titreSite,
                 titreSite: titreSite,
-                name: userCurrentlyLogged.first_name +
+                name: userCurrentlyLogged.Nom_famille +
                     " " +
-                    userCurrentlyLogged.last_name,
+                    userCurrentlyLogged.Prenom,
                 ConnectedUser: userCurrentlyLogged,
                 user_Cvs: Cvs,
                 checkCvs: checkifCvsIsNull,
@@ -175,7 +178,6 @@ app.get('/',checkAuthenticated,(req, res) => {
         }
     });
         if(userCurrentlyLogged.user_type == "employeur"){
-            console.log(userCurrentlyLogged.email);
             res.render("Profil", {
                 titrePage: titreSite,
                 titreSite: titreSite,
@@ -190,15 +192,15 @@ app.get('/',checkAuthenticated,(req, res) => {
 app.get("/Profil", checkAuthenticated, (req, res) => {
     cvs.find({ user_id: userCurrentlyLogged._id }, async function (err, Cvs) {
         if(userCurrentlyLogged.user_type == "etudiant"){
-       
-        if (Cvs == null) { 
-         
+           //Cvs contiendra tous les cv que le user a deja fait 
+           if (Cvs == null) {
+            //bool qui determine si oui ou non il en a deja fait 
             res.render("Profil", {
                 titrePage: titreSite,
                 titreSite: titreSite,
-                name: userCurrentlyLogged.first_name +
+                name: userCurrentlyLogged.Nom_famille +
                     " " +
-                    userCurrentlyLogged.last_name,
+                    userCurrentlyLogged.Prenom,
                 ConnectedUser: userCurrentlyLogged,
                 user_Cvs: Cvs,
                 checkCvs: checkifCvsIsNull,
@@ -209,9 +211,9 @@ app.get("/Profil", checkAuthenticated, (req, res) => {
             res.render("Profil", {
                 titrePage: titreSite,
                 titreSite: titreSite,
-                name: userCurrentlyLogged.first_name +
+                name: userCurrentlyLogged.Nom_famille+
                     " " +
-                    userCurrentlyLogged.last_name,
+                    userCurrentlyLogged.Prenom,
                 ConnectedUser: userCurrentlyLogged,
                 user_Cvs: Cvs,
                 checkCvs: checkifCvsIsNull,
@@ -232,6 +234,7 @@ app.get("/Profil", checkAuthenticated, (req, res) => {
         }
     
 });
+
 app.post('/Connexion', saveUserLogged, passport.authenticate('local', {
     successRedirect: '/Profil',
     failureRedirect: '/Connexion',
@@ -326,8 +329,10 @@ function creationProfilEmployeur(Id_entreprise, Nom_entreprise, Nom_recruteur, E
         password: Password,
         user_type : "employeur"
     })
-    console.log("Un nouvel employeur a été créé")
+    console.log("Un nouvel employeur a été créé");
 }
+
+//ajoute les infos entrer dans la bd sous un nouveau cv
 app.post('/creationcv',checkAuthenticated,(req,res) =>{
     cvs.create({
         title: req.body.title,
@@ -338,5 +343,16 @@ app.post('/creationcv',checkAuthenticated,(req,res) =>{
     });
  res.redirect('/');
 });
+
+
+//recois le cv choisi par le user envoie les infos afin de creer et afficher le cv
+app.post('/affichercv',checkAuthenticated,async (req,res) =>{
+
+  const cvSelected = await cvs.findOne({title:req.body.cv_selected});
+  if(cvSelected != null){
+    pdfService.createCv(cvSelected,res);
+  }
+  });
+
 app.listen(3000);
 

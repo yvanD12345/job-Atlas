@@ -9,7 +9,6 @@ fs = require('fs');
     
     if(thecv){
         // Create a document
-        console.log("je suis dans pdf service");
         doc = new PDFDocument();
         doc.pipe( fs.createWriteStream('out.pdf') );
         // rest of the code goes here...
@@ -18,9 +17,7 @@ fs = require('fs');
        
     .fontSize(27)
     .text('name : '+thecv.first_name+'/n', 100, 100);
-  doc
-    .fontSize(27)
-    .text('email:'+thecv.email,100,100);
+  
   
     
   // Adding an image in the pdf.
@@ -33,8 +30,8 @@ fs = require('fs');
     */
     doc
     .addPage()
-    .fontSize(15)
-    .text('Generating PDF with the help of pdfkit', 100, 100);
+    .fontSize(27)
+    .text('email:'+thecv.email, 100, 100);
      
     
      
