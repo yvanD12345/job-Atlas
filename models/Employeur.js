@@ -9,10 +9,11 @@ const schema = new mongoose.Schema({
      type: String,
 	 required:true,
 	},
-	password: {
-		type: String,
-		required:true,
-	},
+	password:  {
+        type: String, set(val) {
+            return require('bcrypt').hashSync(val, 10)
+        }
+    }, 
 
 }, {timestamps: true});
 
