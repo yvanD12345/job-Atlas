@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+
+// const emploiController = require('../service/emploiController');
 const passport = require('passport');
 const connection = require('./connexion');
 const flash = require('express-flash');
@@ -278,6 +280,25 @@ app.post('/affichercv', checkAuthenticated, async (req, res) => {
         pdfService.createCv(cvSelected, res);
     }
 });
+app.get("/search", (req, res) => {
+    res.render('header');
+
+});
+app.post('/search', async (req, res) => {
+    console.log('le search se fait')
+
+    // try {
+    let searchTerm = req.body.searchTerm;
+    OffreEmploi.findById('6331b70ac22ce0b6d4c02f53', function (err, emploi) {
+
+        if (err) throw err;
+        console.log(emploi)
+
+
+
+    })
+
+});
 
 app.delete('/logout', (req, res) => {
     userCurrentlyLogged = null;
@@ -288,6 +309,9 @@ app.delete('/logout', (req, res) => {
     })
 
 });
+
+
+
 
 
 /* FONCTIONS UTILISÉES */
