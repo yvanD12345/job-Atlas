@@ -1,44 +1,57 @@
-<nav id="topheader" class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
-    <div class="container-fluid">
-        <!-- <a class="navbar-brand" href="/">
-            <img src="/images/LOGO.png" width="60" height="50" alt="Image du logo croped">
-        </a> -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title> 
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+ rel="stylesheet" 
+integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" 
+crossorigin="anonymous">
+  </head>
+
+  <body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                <li>
-                    <% if (pageTitle==='Accueil' ) { %> <a class="nav-link active" href="/">Accueil</a>
-                        <% } else {%> <a class="nav-link" href="/">Accueil</a>
-                            <% } %>
-                </li>
-                <li>
-                    <% if (pageTitle==='Etudiants' ) { %> <a class="nav-link active" href="/Etudiants">Etudiants</a>
-                        <% } else { %> <a class="nav-link" href="/Etudiants">Etudiants</a>
-                            <% } %>
-                </li>
-                <li>
-                    <% if (pageTitle==='Employeurs' ) { %> <a class="nav-link active" href="/Employeurs">Employeurs</a>
-                        <% } else { %> <a class="nav-link" href="/Employeurs">Employeurs</a>
-                            <% } %>
-                </li>
-                <li>
-                    <% if (pageTitle==='Offres_emploi' ) { %> <a class="nav-link active" href="/Offres_emploi">Offres_emploi</a>
-                        <% } else { %> <a class="nav-link" href="/Offres_emploi">Offres_emploi</a>
-                            <% } %>
-                </li>
-                <li>
-                    <% if (pageTitle==='CVs' ) { %> <a class="nav-link active" href="/CVs">CVs</a>
-                        <% } else { %> <a class="nav-link" href="/CVs">CVs</a>
-                            <% } %>
-                </li>
-
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/Acceuil">Acceuil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Inscription</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Connexion
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/Etudiants">Etudiant</a></li>
+                  <li><a class="dropdown-item" href="/Employeurs">Employeur</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="dropdown-item" href="/Offres_emploi">Offre d'emploi</a>
+              </li>
             </ul>
-            <!-- <div id="login-logout"></div> -->
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
         </div>
-    </div>
-
-</nav>
+      </nav>
+    <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" 
+    crossorigin="anonymous">
+    </script>
+  </body>
+</html>
