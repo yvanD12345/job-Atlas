@@ -42,9 +42,12 @@ crossorigin="anonymous">
               </li>
             </ul>
             <form method="POST" class="d-flex" action="/search" role="search">
-              <input class="form-control me-2" type="search" name="searchTerm" placeholder="Search" aria-label="Search">
+              <input class="form-control me-2" type="text" id ="searchTerm" onkeyup="sendData(this)" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+            <section id="searchResults">
+
+            </section>
           </div>
         </div>
       </nav>
@@ -52,6 +55,37 @@ crossorigin="anonymous">
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" 
     crossorigin="anonymous">
+
+    function sendData(e){
+        const searchResults = document.getElementById('searchResults');
+        let match = e.value.match(/^[a-zA-Z]*/);
+        let match2 = e.value.match(/\s*/);
+        if(match2[0] === e.value){
+            searchResults.innerHTML = '';
+            return;
+        }
+        if(match[0]=== e.value){
+            fletch('getOffreEmploi',{
+            method: 'POST',
+            Headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({payload: e.value})
+        }).then(res => res.json()).then(data => {
+            let payload = data.payload;
+            searchResults.innerHTML = '';
+            if(payload.length < 1){
+                searchResults.innerHTML = '<p>Désolé, rien de trouvé.</p>';
+                return;
+            }
+            payload.forEach((item, index) => {
+                if(index > 0) searchResults.innerHTML += '<hr>';
+                searchResults.innerHTML += <p>${item.Titre_emploi}</p>;
+            });
+        })
+
+            return;
+        };
+        searchResults.innerHTML = '';
+    }
     </script>
   </body>
 </html>

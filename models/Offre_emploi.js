@@ -6,9 +6,9 @@ const OffreEmploischema = new mongoose.Schema ({
     Description: String,
     Nbr_postes_vides: Number
 })
-OffreEmploischema.index({ Titre_emploi: 'text', Description: 'text'});
+OffreEmploischema.index({ Titre_emploi: 'String', Description: 'String'});
 //OffreEmploischema.index({"$**" : 'text'});
 
 // pour l'acces dans les autres fichiers
-const offres_emploi = mongoose.model('offres_emploi', OffreEmploischema);
-module.exports= offres_emploi
+const offre_emploi = mongoose.model('offre_emploi', OffreEmploischema);
+module.exports= offre_emploi
