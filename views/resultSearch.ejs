@@ -1,15 +1,17 @@
-<h1 class="pb-4">Resultats de la recherche</h1>
-
-<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-    <% if(emploi != ''){%>
-        <% emploi.forEach(function(emploi, index){ %>
-            <a href="/emploi/<%= emploi._id %>" class="col text-center category__link">
-                <div class="pt-1"><%=<emploi.nom %></div>
-                    <div class="pt-2"><%=<emploi.description%></div>
-            </a>
-       <% }) %>
-    <%} else {%>
-        <p>No items found.</p>
-   <% }%>
-
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <form action="" method="get">
+    <h3 style="display:inline-block;">Titre offre:</h3>
+    <label for="titreOffre">
+        <%=rsltTrouves.Titre_emploi%>
+    </label>
+   </form>
+</body>
+</html>

@@ -42,7 +42,7 @@ crossorigin="anonymous">
               </li>
             </ul>
             <form method="POST" class="d-flex" action="/search" role="search">
-              <input class="form-control me-2" type="text" id ="searchTerm" onkeyup="sendData(this)" placeholder="Search" aria-label="Search">
+              <input class="form-control me-2" type="text" name ="searchTerm" onkeyup="sendData(this)" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <section id="searchResults">

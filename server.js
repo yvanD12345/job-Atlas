@@ -86,9 +86,13 @@ app.get('/creationcv', checkAuthenticated, (req, res) => {
 app.get('/affichercv', checkAuthenticated, (req, res) => {
     res.render('afficherCv')
 });
+
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/Acceuil.ejs');
+    res.redirect('Accueil')
 });
+// app.get('/', (req, res) => {
+//     res.sendFile(__dirname + './views/Accueil.ejs');
+// });
 app.get('/header', checkAuthenticated, (req, res) => {
     res.render('header')
 });
@@ -291,29 +295,32 @@ app.get("/search", (req, res) => {
     res.render('header');
 
 });
-/* app.post('/search', async (req, res) => {
+function escapeRegex(text){
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+app.post('/search', async (req, res) => {
     console.log('le search se fait')
 
     // try {
-    let searchTerm = req.body.searchTerm;
-   // OffreEmploi.findById('6331b70ac22ce0b6d4c02f53', function (err, emploi) {
-    JobAtlas_database.offres_emplois.find("searchTerm", function (err, emploi){
+    const regex  =new RegExp(escapeRegex (req.body.searchTerm), 'gi');
 
-        if (err) throw err;
-        console.log(emploi)
+    OffreEmploi.find({ Titre_emploi: regex}, function(err, rsltTrouves){
+        if(err) {
+            console.log(err);
+        } else {
+            console.log(rsltTrouves)
+           res.render("resultSearch", { rsltTrouves: rsltTrouves });
+        }
+    }); 
+ });
 
-
-
-    })
-
-}); */
 
 app.post('getOffreEmploi', async (req, res) => {
     let payload = req.body.payload.trim();
-    let search = await offres_emplois.find({Titre_emploi: {$regex: new RegExp('^'+payload+ '.*', 'i')}}).exec();
+    let search = await offres_emplois.find({ Titre_emploi: { $regex: new RegExp('^' + payload + '.*', 'i') } }).exec();
     //resultat de recherche limité à 10
     search = search.slice(0, 10);
-    res.sendFile({payload: search});
+    res.sendFile({ payload: search });
 });
 
 app.delete('/logout', (req, res) => {
