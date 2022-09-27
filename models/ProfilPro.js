@@ -5,6 +5,7 @@ const formation = require('./ProfilProfessionel/Formation');
 const schema = new mongoose.Schema({
 
     Id_etudiant: Number,
+    //FAIRE UNE LISTE POUR LES 
     Premiere_experience_pro: experienceTravail.schema,
     Seconde_experience_pro: experienceTravail.schema,
     Troisieme_experience_pro: experienceTravail.schema,

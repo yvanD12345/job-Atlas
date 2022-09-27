@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const OffreEmploischema = new mongoose.Schema ({
 	Id_offre: Number,
 	Id_employeur_lie: String,
+    Titre_emploi:String,
     Description: String,
     Nbr_postes_vides: Number
 })

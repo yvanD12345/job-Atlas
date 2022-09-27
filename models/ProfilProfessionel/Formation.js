@@ -11,7 +11,7 @@ const schema = new mongoose.Schema({
 	domaine_expertise: {
 		type: String,
 		required: true,
-	},
+	}
 
 })
 
