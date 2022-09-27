@@ -301,7 +301,7 @@ function escapeRegex(text){
 app.post('/search', async (req, res) => {
     console.log('le search se fait')
 
-    // try {
+    
     const regex  =new RegExp(escapeRegex (req.body.searchTerm), 'gi');
 
     OffreEmploi.find({ Titre_emploi: regex}, function(err, rsltTrouves){
