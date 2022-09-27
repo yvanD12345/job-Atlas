@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+
+// const emploiController = require('../service/emploiController');
 const passport = require('passport');
 const connection = require('./connexion');
 const flash = require('express-flash');
@@ -66,6 +68,7 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodeOverride('_method'));
+app.use(express.json());
 
 //ACCÈS AUX PAGES
 app.get('/Connexion', checkNotAuthenticated, (req, res) => {
@@ -82,6 +85,12 @@ app.get('/creationcv', checkAuthenticated, (req, res) => {
 });
 app.get('/affichercv', checkAuthenticated, (req, res) => {
     res.render('afficherCv')
+});
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/Acceuil.ejs');
+});
+app.get('/header', checkAuthenticated, (req, res) => {
+    res.render('header')
 });
 
 //PERMET DE DETERMINER QUI EST L'UTILISATEUR QUI EST PRÉSENTEMENT CONNECTER QUAND LE USER FAIT UN LOGIN
@@ -278,6 +287,34 @@ app.post('/affichercv', checkAuthenticated, async (req, res) => {
         pdfService.createCv(cvSelected, res);
     }
 });
+app.get("/search", (req, res) => {
+    res.render('header');
+
+});
+/* app.post('/search', async (req, res) => {
+    console.log('le search se fait')
+
+    // try {
+    let searchTerm = req.body.searchTerm;
+   // OffreEmploi.findById('6331b70ac22ce0b6d4c02f53', function (err, emploi) {
+    JobAtlas_database.offres_emplois.find("searchTerm", function (err, emploi){
+
+        if (err) throw err;
+        console.log(emploi)
+
+
+
+    })
+
+}); */
+
+app.post('getOffreEmploi', async (req, res) => {
+    let payload = req.body.payload.trim();
+    let search = await offres_emplois.find({Titre_emploi: {$regex: new RegExp('^'+payload+ '.*', 'i')}}).exec();
+    //resultat de recherche limité à 10
+    search = search.slice(0, 10);
+    res.sendFile({payload: search});
+});
 
 app.delete('/logout', (req, res) => {
     userCurrentlyLogged = null;
@@ -288,6 +325,9 @@ app.delete('/logout', (req, res) => {
     })
 
 });
+
+
+
 
 
 /* FONCTIONS UTILISÉES */
