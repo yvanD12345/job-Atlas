@@ -87,7 +87,7 @@ app.get('/affichercv', checkAuthenticated, (req, res) => {
     res.render('afficherCv')
 });
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/Acceuil.ejs');
+    res.render('Accueil')
 });
 app.get('/header', checkAuthenticated, (req, res) => {
     res.render('header')
