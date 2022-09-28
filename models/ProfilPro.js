@@ -10,6 +10,7 @@ const schema = new mongoose.Schema({
     Seconde_experience_pro: experienceTravail.schema,
     Troisieme_experience_pro: experienceTravail.schema,
     Formation: formation.schema,
+    Competences: [String]
 })
 
 

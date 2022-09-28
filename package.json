@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
-    "start": "node server.js"
-  },
+    "test": "jest --testEnvironment=node --runInBand ./tests"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yvanD12345/job-Atlas.git"
@@ -31,6 +30,7 @@
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
     "method-override": "^3.0.0",
+    "mongodb-memory-server": "^8.9.3",
     "mongoose": "^6.6.0",
     "node-iframe": "^1.8.5",
     "passport": "^0.6.0",
