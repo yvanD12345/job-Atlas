@@ -29,8 +29,3 @@ module.exports = {
     effacerBD: effacerBD,
     deconnexionBD: deconnexionBD
 }
-
-//cloud
-//'mongodb+srv://JobAtlas:JobAtlas@cluster0.6a5olob.mongodb.net/?retryWrites=true&w=majority'
-//local
-//'mongodb://localhost:27017/JobAtlas_database'
