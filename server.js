@@ -1,7 +1,7 @@
 //export {creationProfilEmployeur,creationProfilEtudiant}
 const express = require('express');
 const app = express();
-const db=require('./connexion')
+const db = require('./connexion')
 const passport = require('passport');
 const connection = require('./connexion');
 const flash = require('express-flash');
@@ -295,24 +295,24 @@ app.get("/search", (req, res) => {
     res.render('header');
 
 });
-function escapeRegex(text){
+function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
 app.post('/search', async (req, res) => {
     console.log('le search se fait')
 
-    
-    const regex  =new RegExp(escapeRegex (req.body.searchTerm), 'gi');
 
-    OffreEmploi.find({ Titre_emploi: regex}, function(err, rsltTrouves){
-        if(err) {
+    const regex = new RegExp(escapeRegex(req.body.searchTerm), 'gi');
+
+    OffreEmploi.find({ Titre_emploi: regex }, function (err, rsltTrouves) {
+        if (err) {
             console.log(err);
         } else {
             console.log(rsltTrouves)
-           res.render("resultSearch", { rsltTrouves: rsltTrouves });
+            res.render("resultSearch", { rsltTrouves: rsltTrouves });
         }
-    }); 
- });
+    });
+});
 
 
 app.post('getOffreEmploi', async (req, res) => {
@@ -337,7 +337,7 @@ app.delete('/logout', (req, res) => {
 
 
 /* FONCTIONS UTILISÉES */
- function creationProfilEtudiant(Id_etudiant, Prenom, Nom_famille, Age, Email, Password) {
+function creationProfilEtudiant(Id_etudiant, Prenom, Nom_famille, Age, Email, Password) {
 
     var nouvelEtudiant = { Id_etudiant: Id_etudiant, Prenom: Prenom, Nom_famille: Nom_famille, Age: Age, Password: Password };
     console.log(nouvelEtudiant)
@@ -393,9 +393,9 @@ function determinationAgeDateNaissance(dateNaissance) {
     return ageEtudiant
 
 }
-module.exports={
-    creationProfilEmployeur:creationProfilEmployeur,
-    creationProfilEtudiant:creationProfilEtudiant
+module.exports = {
+    creationProfilEmployeur: creationProfilEmployeur,
+    creationProfilEtudiant: creationProfilEtudiant
 };
 
 
