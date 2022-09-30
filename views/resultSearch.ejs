@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,4 +14,18 @@
     </label>
    </form>
 </body>
-</html>
+</html> -->
+<header>
+    <%- include ('./header') %>
+</header>
+
+<h1 style="text-align: center;">Resultat recherche</h1>
+<% rsltTrouves.forEach(function(rsltTrouves, index){ %>
+<div>
+    <p><%= rsltTrouves.Id_employeur_lie%></p>
+    <p><%= rsltTrouves.Titre_emploi%></p>
+    <p><%= rsltTrouves.Description%></p>
+    <p><%= rsltTrouves.Id_employeur%></p>
+    <p><%= rsltTrouves.Nbr_postes_vides%></p>
+</div>
+<% }); %>
