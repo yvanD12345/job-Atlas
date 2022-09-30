@@ -259,7 +259,7 @@ app.post('/Inscription', urlencoded, checkNotAuthenticated, (req, res) => {
     if (req.body.EtudiantCheckBox == "Etudiant") {
         console.log("C'est un etudiant")
         typeUser = "etud"
-        creationProfilEtudiant(req.body.id_etudiant, req.body.prenom_etudiant, req.body.nom_etudiant, req.body.date_naissance_etudiant, req.body.email_etudiant, req.body.mdp_etudiant, req.body.mdp_etudiant_scndfois);
+        creationProfilEtudiant(req.body.DA_etudiant, req.body.prenom_etudiant, req.body.nom_etudiant, req.body.date_naissance_etudiant, req.body.email_etudiant, req.body.mdp_etudiant, req.body.mdp_etudiant_scndfois);
 
     } else if (req.body.EmployeurCheckBox == "Employeur") {
         console.log("C'est un employé")
@@ -337,47 +337,48 @@ app.delete('/logout', (req, res) => {
 
 
 /* FONCTIONS UTILISÉES */
-function creationProfilEtudiant(Id_etudiant, Prenom, Nom_famille, Age, Email, Password) {
+async function creationProfilEtudiant(DA_etudiant, Prenom, Nom_famille, Age, Email, Password) {
 
-    var nouvelEtudiant = { Id_etudiant: Id_etudiant, Prenom: Prenom, Nom_famille: Nom_famille, Age: Age, Password: Password };
-    console.log(nouvelEtudiant)
-    etudiants.create({
-        Id_etudiant: Id_etudiant,
+    //var etud = { DA_etudiant: DA_etudiant, Prenom: Prenom, Nom_famille: Nom_famille, Age: Age, Password: Password };
+    //console.log(etud)
+
+    const nouvelEtudiant = new etudiants({
+        DA_etudiant: DA_etudiant,
         Prenom: Prenom,
         Nom_famille: Nom_famille,
         Age: determinationAgeDateNaissance(Age),
         email: Email,
         password: Password,
         user_type: "etudiant"
-    }, function (err) {
-        if (err) throw err;
     })
+    await nouvelEtudiant.save();
     users.create({
         user_type: "etudiant",
         password: Password,
         email: Email
     })
     console.log("Un nouvel étudiant a été créé");
+    console.log(nouvelEtudiant)
+    return nouvelEtudiant._id;
 }
-function creationProfilEmployeur(Id_entreprise, Nom_entreprise, Nom_recruteur, Email, Password) {
-    var nouvelEmployeur = { Id_entreprise: Id_entreprise, Nom_entreprise: Nom_entreprise, Nom_recruteur: Nom_recruteur, Email: Email, Password: Password }
-    console.log(nouvelEmployeur)
-    employeurs.create({
-        Id_entreprise: Id_entreprise,
+async function creationProfilEmployeur(numero_entreprise, Nom_entreprise, Nom_recruteur, Email, Password) {
+
+    const nouvelEmployeur = new employeurs({
+        numero_entreprise: numero_entreprise,
         Nom_entreprise: Nom_entreprise,
         Nom_recruteur: Nom_recruteur,
         email: Email,
         password: Password,
         user_type: "employeur"
-    }, function (err) {
-        if (err) throw err;
     })
+    nouvelEmployeur.save()
     users.create({
         email: Email,
         password: Password,
         user_type: "employeur"
     })
     console.log("Un nouvel employeur a été créé");
+
 }
 function parseDate(input) {
     var parts = input.match(/(\d+)/g);

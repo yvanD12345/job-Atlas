@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const schema = new mongoose.Schema({
 	user_type: String,
 
-	Id_entreprise: Number,
+	numero_entreprise: Number,
 	Nom_entreprise: String,
 	Nom_recruteur: String,
 	email: {
