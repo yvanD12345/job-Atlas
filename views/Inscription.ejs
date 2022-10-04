@@ -37,6 +37,7 @@
         <input type="checkbox" id="Employeur" name="EmployeurCheckBox" value="Employeur" onclick="estEmployeur()">
         <label for="Employeur">Je suis un employeur</label><br>
 
+        <!-- NE PAS CHANGER LE DIV CHAMPS ÉTUDIANT -->
         <div id="champsEtudiant" style="display:none">
             <h3>Quel est votre ID d'étudiant? ?</h3>
             <input type="number" id="id_etudiant" name="id_etudiant" max="9999999" min="1000000"
@@ -51,7 +52,7 @@
 
         </div>
 
-
+        <!-- NE PAS CHANGER LE DIV CHAMPS ENTREPRISE -->
         <div id="champsEntreprise" style="display:none">
             <h3>Quel est votre ID d'entreprise? ?</h3>
             <input type="number" id="id_employeur" name="id_employeur" min="1000000000" maxlength="9999999999"
@@ -63,15 +64,18 @@
             <input type="text" id="nom_recruteur" name="nom_recruteur">
 
         </div>
-
+        <!-- NE PAS CHANGER LE DIV CHAMPS COMMUNS -->
         <div id="champsCommuns" style="display: none;">
+
             <h3>Veuillez saisir votre courriel</h3>
             <input type="email" id="email" name="email">
             <h3>Veuillez saisir un mot de passe</h3>
             <input type="password" id="mdp" name="mdp" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                title="Le mot de passe doit contenir 8 caractères, au moins un chiffre, au moins une lettre majuscule, au moins une lettre miniscule et un symbole spécial" required>
+                title="Le mot de passe doit contenir 8 caractères, au moins un chiffre, au moins une lettre majuscule, au moins une lettre miniscule et un symbole spécial"
+                required>
             <h3>Veuillez saisir notre nouveau mot de passe une seconde fois</h3>
-            <input type="password" id="mdpScndfois" name="mdpScndfois" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+            <input type="password" id="mdpScndfois" name="mdpScndfois" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                required>
             <button onclick="check()"> Je m'inscris</button>
         </div>
 
@@ -102,12 +106,12 @@
         function check() {
 
             var mdpScnd = document.getElementById('mdpScndfois')
-            var mdp=document.getElementById('mdp')
+            var mdp = document.getElementById('mdp')
             if (mdpScnd.value != mdp.value) {
                 alert('Les deux mots de passe ne correspondent pas')
                 //input.setCustomValidity('Password Must be Matching.');
             } else {
-                
+
                 document.getElementById("myForm").submit();
             }
         }
