@@ -10,7 +10,7 @@ function connexion() {
         console.log('connection has been made');
     }).on('error', (error) => console.log(error));
 }
-// //Déconnecte et ferme la connexion
+//Déconnecte et ferme la connexion
 async function deconnexionBD() {
     await mongoose.connection.dropDatabase();
     await mongoose.connection.close();

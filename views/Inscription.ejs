@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-    <header>
-        <%- include ('./header') %>
-    </header>
+<header>
+    <%- include ('./header') %>
+</header>
 
 <head>
     <meta charset="UTF-8">
@@ -13,13 +13,22 @@
 
 </head>
 <!-- CSS only -->
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
 
 <body>
-    <header>
-
-    </header>
-
-    <form action='/Inscription' method="POST" class="form">
+    <form action='/Inscription' method="POST" class="form" id="myForm">
         <h1>INSCRIPTION</h1>
 
         <h3>Êtes vous un étudiant ou un employeur ?</h3>
@@ -30,7 +39,9 @@
 
         <div id="champsEtudiant" style="display:none">
             <h3>Quel est votre ID d'étudiant? ?</h3>
-            <input type="text" id="id_etudiant" name="id_etudiant">
+            <input type="number" id="id_etudiant" name="id_etudiant" max="9999999" min="1000000"
+                oninvalid="this.setCustomValidity('Le numéro étudiant doit contenir 7 chiffres')"
+                oninput="this.setCustomValidity('')">
             <h3>Quel est votre prénom ?</h3>
             <input type="text" id="prenom_etudiant" name="prenom_etudiant">
             <h3>Quel est votre nom ?</h3>
@@ -38,33 +49,31 @@
             <h3>Quel est votre date de naissance ?</h3>
             <input type="date" id="date_naissance_etudiant" name="date_naissance_etudiant">
 
-            
-            <h3>Veuillez saisir votre courriel</h3>
-            <input type="text" id="email_etudiant" name="email_etudiant">
-            <h3>Veuillez saisir un mot de passe</h3>
-            <input type="password" id="mdp_etudiant" name="mdp_etudiant">
-            <h3>Veuillez saisir notre nouveau mot de passe une seconde fois</h3>
-            <input type="password"  id="mdp_etudiant_scndfois" name="mdp_etudiant_scndfois">
         </div>
 
 
         <div id="champsEntreprise" style="display:none">
             <h3>Quel est votre ID d'entreprise? ?</h3>
-            <input type="text" id="id_employeur" name="id_employeur">
+            <input type="number" id="id_employeur" name="id_employeur" min="1000000000" maxlength="9999999999"
+                oninvalid="this.setCustomValidity('Le numéro entreprise doit contenir 10 chiffres')"
+                oninput="this.setCustomValidity('')">
             <h3>Quel est le nom de votre entreprise? </h3>
             <input type="text" id="nom_employeur" name="nom_employeur">
             <h3>Quel est votre nom en tant que recruteur ?</h3>
-            <input type="text" id="nom_recruteur"name="nom_recruteur">
+            <input type="text" id="nom_recruteur" name="nom_recruteur">
 
-            <h3>Veuillez saisir votre courriel</h3>
-            <input type="text" id="email_employeur" name="email_employeur">
-            <h3>Veuillez saisir un mot de passe</h3>
-            <input type="password" id="mdp_employeur" name="mdp_employeur">
-            <h3>Veuillez saisir notre nouveau mot de passe une seconde fois</h3>
-            <input type="password"  id="mdp_employeur_scndfois" name="mdp_employeur_scndfois">
         </div>
-        <input type="submit" value="Je m'inscris !">
 
+        <div id="champsCommuns" style="display: none;">
+            <h3>Veuillez saisir votre courriel</h3>
+            <input type="email" id="email" name="email">
+            <h3>Veuillez saisir un mot de passe</h3>
+            <input type="password" id="mdp" name="mdp" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                title="Le mot de passe doit contenir 8 caractères, au moins un chiffre, au moins une lettre majuscule, au moins une lettre miniscule et un symbole spécial" required>
+            <h3>Veuillez saisir notre nouveau mot de passe une seconde fois</h3>
+            <input type="password" id="mdpScndfois" name="mdpScndfois" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+            <button onclick="check()"> Je m'inscris</button>
+        </div>
 
 
 
@@ -72,17 +81,37 @@
 
     </form>
     <!-- Fonctions JavaScript -->
+
     <script>
         function estEmployeur() {
             document.getElementById("Etudiant").checked = false
             document.getElementById("champsEtudiant").style.display = "none";
             document.getElementById("champsEntreprise").style.display = "block";
+
+            document.getElementById("champsCommuns").style.display = "block";
+
         }
         function estEtudiant() {
             document.getElementById("Employeur").checked = false
             document.getElementById("champsEntreprise").style.display = "none";
             document.getElementById("champsEtudiant").style.display = "block";
+
+            document.getElementById("champsCommuns").style.display = "block";
         }
+
+        function check() {
+
+            var mdpScnd = document.getElementById('mdpScndfois')
+            var mdp=document.getElementById('mdp')
+            if (mdpScnd.value != mdp.value) {
+                alert('Les deux mots de passe ne correspondent pas')
+                //input.setCustomValidity('Password Must be Matching.');
+            } else {
+                
+                document.getElementById("myForm").submit();
+            }
+        }
+
     </script>
 
 
