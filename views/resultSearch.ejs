@@ -1,31 +1,33 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
+ <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" type="test/css" href="../Styles/styles.css"> -->
     <title>Document</title>
 </head>
-<body>
-   <form action="" method="get">
-    <h3 style="display:inline-block;">Titre offre:</h3>
-    <label for="titreOffre">
-        <%=rsltTrouves.Titre_emploi%>
-    </label>
-   </form>
-</body>
-</html> -->
+
 <header>
     <%- include ('./header') %>
 </header>
 
-<h1 style="text-align: center;">Resultat recherche</h1>
-<% rsltTrouves.forEach(function(rsltTrouves, index){ %>
-<div>
-    <p><%= rsltTrouves.Id_employeur_lie%></p>
-    <p><%= rsltTrouves.Titre_emploi%></p>
-    <p><%= rsltTrouves.Description%></p>
-    <p><%= rsltTrouves.Id_employeur%></p>
-    <p><%= rsltTrouves.Nbr_postes_vides%></p>
-</div>
-<% }); %>
+<body>
+    <h1 style="text-align: center;">Resultat recherche</h1>
+    <% rsltTrouves.forEach(function(rsltTrouves, index){ %>
+    <div class="wrapper">
+        <div class="row">
+            <div class="content">
+                <h1><%= rsltTrouves.Titre_emploi%></h1>
+                <h3><%= rsltTrouves.Id_employeur_lie%></h3>
+                <p><%= rsltTrouves.Description%></p>
+                <p><%= rsltTrouves.Nbr_postes_vides%> poste(s) disponible(s)</p>
+            </div>
+        </div>
+    </div>
+    <% }); %>
+</body>
+</html>
+
+
+
