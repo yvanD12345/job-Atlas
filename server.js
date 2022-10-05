@@ -1,4 +1,3 @@
-//export {creationProfilEmployeur,creationProfilEtudiant}
 const express = require('express');
 const app = express();
 const db = require('./connexion')
@@ -21,10 +20,17 @@ require("dotenv").config();
 const employeurs = require('./models/Employeur');
 const users = require('./models/User');
 const cvs = require('./models/cvs')
-const etudiants = require('./models/Etudiant')
+const etudiants = require('./models/Etudiant');
 const profilPro = require('./models/ProfilPro')
 const OffreEmploi = require('./models/Offre_emploi');
 const user = require('./models/User');
+
+//Import des fonctions
+const Etudiant=require('./fonctions/creationEtudiant');
+const VerifierEmail=require('./fonctions/verificationEmail');
+const Employeur=require('./fonctions/creationEmployeur');
+
+
 
 //INITIALISATION VARIABLES
 var titreSite = "JobAtlas";
@@ -254,17 +260,16 @@ app.post('/Connexion', saveUserLogged, passport.authenticate('local', {
 
 app.post('/Inscription', urlencoded, checkNotAuthenticated, (req, res) => {
     var email = req.body.email;
-    var typeUser;
-    if (verificationUserExistant(email) == false) {
+    if (VerifierEmail.verificationUserExistant(email) == false) {
         console.log('user existe deja')
     }
     else {
         if (req.body.EtudiantCheckBox == "Etudiant") {
             console.log("C'est un etudiant")
-            creationProfilEtudiant(req.body.DA_etudiant, req.body.prenom_etudiant, req.body.nom_etudiant, req.body.date_naissance_etudiant, req.body.email, req.body.mdp);
+            Etudiant.creationProfilEtudiant(req.body.DA_etudiant, req.body.prenom_etudiant, req.body.nom_etudiant, req.body.date_naissance_etudiant, req.body.email, req.body.mdp);
         } else if (req.body.EmployeurCheckBox == "Employeur") {
             console.log("C'est un employé")
-            creationProfilEmployeur(req.body.id_employeur, req.body.nom_employeur, req.body.nom_recruteur, req.body.email, req.body.mdp);
+            Employeur.creationProfilEmployeur(req.body.id_employeur, req.body.nom_employeur, req.body.nom_recruteur, req.body.email, req.body.mdp);
         }
     }
     res.redirect('/');
@@ -298,6 +303,7 @@ app.get("/search", (req, res) => {
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
+
 app.post('/search', async (req, res) => {
     console.log('le search se fait')
 
@@ -336,90 +342,10 @@ app.delete('/logout', (req, res) => {
 
 
 
-/* FONCTIONS UTILISÉES */
-function verificationUserExistant(email) {
-    users.findOne({ email: email }, function (err, user) {
-        if (err) {
-            console.log(err);
-        }
-        if (user) {
-            console.log('user exists')
-            return true;
-        } else {
-            message = "user doesn't exist";
-            return false;
-        }
-    });
-}
-async function creationProfilEtudiant(DA_etudiant, Prenom, Nom_famille, Age, Email, Password) {
 
 
-    const nouvelEtudiant = new etudiants({
-        DA_etudiant: DA_etudiant,
-        Prenom: Prenom,
-        Nom_famille: Nom_famille,
-        Age: determinationAgeDateNaissance(Age),
-        email: Email,
-        password: Password,
-        user_type: "etudiant"
-    })
-    await nouvelEtudiant.save();
-    users.create({
-        user_type: "etudiant",
-        password: Password,
-        email: Email
-    })
-    console.log("Un nouvel étudiant a été créé");
-    console.log(nouvelEtudiant._id)
-    return nouvelEtudiant;
-}
-async function creationProfilEmployeur(numero_entreprise, Nom_entreprise, Nom_recruteur, Email, Password) {
 
-    const nouvelEmployeur = new employeurs({
-        numero_entreprise: numero_entreprise,
-        Nom_entreprise: Nom_entreprise,
-        Nom_recruteur: Nom_recruteur,
-        email: Email,
-        password: Password,
-        user_type: "employeur"
-    })
-    nouvelEmployeur.save()
-    users.create({
-        email: Email,
-        password: Password,
-        user_type: "employeur"
-    })
-    console.log("Un nouvel employeur a été créé");
-    return nouvelEmployeur;
 
-}
-
-function parseDate(input) {
-    var parts = input.match(/(\d+)/g);
-    // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-    return new Date(parts[0], parts[1] - 1, parts[2]); // months are 0-based
-}
-function determinationAgeDateNaissance(dateNaissance) {
-    dateNaissance = parseDate(dateNaissance)
-    var ageDifference = Date.now() - dateNaissance.getTime();
-    var ageDate = new Date(ageDifference);
-    var ageEtudiant = Math.abs(ageDate.getUTCFullYear() - 1970);
-    console.log("L'âge est de " + ageEtudiant)
-    return ageEtudiant
-
-}
-function somme(a, b) {
-    rslt = a + b;
-    return rslt;
-}
-
-module.exports = {
-    creationProfilEmployeur: creationProfilEmployeur,
-    creationProfilEtudiant: creationProfilEtudiant,
-    //somme:somme
-};
-
-//module.exports = app;
 
 
 
