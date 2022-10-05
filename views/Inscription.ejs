@@ -1,124 +1,288 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
-<header>
-    <%- include ('./header') %>
-</header>
+  <head>
+    <title>JobBoard &mdash; Website Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    
+    <link rel="stylesheet" href="css/custom-bs.css">
+    <link rel="stylesheet" href="css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="fonts/line-icons/style.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/quill.snow.css">
+    
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription</title>
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/style.css"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+ rel="stylesheet" 
+integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" 
+crossorigin="anonymous">   
+  </head>
+  <body id="top">
 
 
-</head>
-<!-- CSS only -->
-<style>
-    /* Chrome, Safari, Edge, Opera */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+    
 
-    /* Firefox */
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
-</style>
+<div class="site-wrap">
 
-<body>
-    <form action='/Inscription' method="POST" class="form" id="myForm">
-        <h1>INSCRIPTION</h1>
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+    
 
-        <h3>Êtes vous un étudiant ou un employeur ?</h3>
-        <input type="checkbox" id="Etudiant" name="EtudiantCheckBox" value="Etudiant" onclick="estEtudiant()">
-        <label for="Etudiant"> Je suis un étudiant</label><br>
-        <input type="checkbox" id="Employeur" name="EmployeurCheckBox" value="Employeur" onclick="estEmployeur()">
-        <label for="Employeur">Je suis un employeur</label><br>
+       <!-- NAVBAR -->
+       <header class="site-navbar mt-3">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="site-logo col-6"></div>
+  
+            <nav class="mx-auto site-navigation">
+              <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
+                <li><a href="/">JOB-ATLAS</a></li>
+                <li><a href="/" >Home</a></li>
+                <li class="has-children">
+                  <a href="services.html">Connectez-vous</a>
+                  <ul class="dropdown">
+                    <li><a href="Connexion">Connexion</a></li>
+                    <li><a href="Inscription" class="nav-link active">Inscription</a></li>
+                  </ul>
+                </li>
+                <li>
+                <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
+                <div class="ml-auto">
+                  <a href="Inscription" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Inscrivez-vous</a>
+                  <a href="Connexion" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>S'identifier</a>
+                </div>
+              </div>
+            </li>
+              </ul>
+              
+            </nav>
+            
+            
+  
+          </div>
+        </div>
+      </header>
 
-        <!-- NE PAS CHANGER LE DIV CHAMPS ÉTUDIANT -->
-        <div id="champsEtudiant" style="display:none">
-            <h3>Quel est votre ID d'étudiant? ?</h3>
-            <input type="number" id="id_etudiant" name="id_etudiant" max="9999999" min="1000000"
+    <!-- HOME -->
+    <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+            <h1 class="text-white font-weight-bold">S'inscrire</h1>
+            <div class="custom-breadcrumbs">
+              <a href="Accueil">Home</a> <span class="mx-2 slash">/</span>
+              <span class="text-white"><strong>Inscription</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section">
+        <form action='/Inscription' method="POST" class="form" id="myForm">
+            <h3>Êtes vous un étudiant ou un employeur ?</h3> 
+            <input type="checkbox" id="Etudiant" name="EtudiantCheckBox" value="Etudiant" onclick="estEtudiant()">
+            <label for="Etudiant"> Je suis un étudiant</label><br>
+            <input type="checkbox" id="Employeur" name="EmployeurCheckBox" value="Employeur" onclick="estEmployeur()">
+            <label for="Employeur">Je suis un employeur</label><br>
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mb-5" id="champsEtudiant" style="display:none">
+            <h2 class="mb-4">Inscrivez-vous en tant qu'étudiant</h2>
+              <div class="row form-group" >
+                <div class="col-md-12 mb-3 mb-md-0">   
+                  <label class="text-black" for="fname">Id d'etudiant</label>
+                  <br>
+                  <input type="number" class="form-control" id="id_etudiant" name="id_etudiant" max="9999999" min="1000000"
                 oninvalid="this.setCustomValidity('Le numéro étudiant doit contenir 7 chiffres')"
                 oninput="this.setCustomValidity('')">
-            <h3>Quel est votre prénom ?</h3>
-            <input type="text" id="prenom_etudiant" name="prenom_etudiant">
-            <h3>Quel est votre nom ?</h3>
-            <input type="text" id="nom_etudiant" name="nom_etudiant">
-            <h3>Quel est votre date de naissance ?</h3>
-            <input type="date" id="date_naissance_etudiant" name="date_naissance_etudiant">
-
-        </div>
-
-        <!-- NE PAS CHANGER LE DIV CHAMPS ENTREPRISE -->
-        <div id="champsEntreprise" style="display:none">
-            <h3>Quel est votre ID d'entreprise? ?</h3>
-            <input type="number" id="id_employeur" name="id_employeur" min="1000000000" maxlength="9999999999"
+                    </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">   
+                  <label class="text-black" for="fname">Nom d'etudiant</label>
+                  <br>
+                  <input type="text" class="form-control" id="nom_etudiant" name="nom_etudiant">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">   
+                  <label class="text-black" for="fname">Prénom d'etudiant</label>
+                  <br>
+                  <input type="text" class="form-control" id="prenom_etudiant" name="prenom_etudiant">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">   
+                  <label class="text-black" for="fname">Date de naissance</label>
+                  <br>
+                  <input type="date" class="form-control" id="date_naissance_etudiant" name="date_naissance_etudiant">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">   
+                  <label class="text-black" for="fname">CV etudiant</label>
+                  <br>
+                  <input type="file" class="form-control" accept="application/pdf" id="cv">
+                </div>
+              </div>
+            
+          </div>
+          <div id="champsEntreprise" style="display:none">
+            <h2 class="mb-4">Inscrivez-vous en tant qu'employeur</h2>
+            <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                    <label class="text-black" for="fname">Id entreprise</label>
+                    <br>
+                    <input type="number"  class="form-control" id="id_employeur" name="id_employeur" min="1000000000" maxlength="9999999999"
                 oninvalid="this.setCustomValidity('Le numéro entreprise doit contenir 10 chiffres')"
                 oninput="this.setCustomValidity('')">
-            <h3>Quel est le nom de votre entreprise? </h3>
-            <input type="text" id="nom_employeur" name="nom_employeur">
-            <h3>Quel est votre nom en tant que recruteur ?</h3>
-            <input type="text" id="nom_recruteur" name="nom_recruteur">
-
-        </div>
-        <!-- NE PAS CHANGER LE DIV CHAMPS COMMUNS -->
-        <div id="champsCommuns" style="display: none;">
-
-            <h3>Veuillez saisir votre courriel</h3>
-            <input type="email" id="email" name="email">
-            <h3>Veuillez saisir un mot de passe</h3>
-            <input type="password" id="mdp" name="mdp" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                    <label class="text-black" for="fname">Nom employeur</label>
+                    <br>
+                    <input type="text" class="form-control" id="nom_employeur" name="nom_employeur">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                    <label class="text-black" for="fname">Nom recruteur</label>
+                    <br>
+                    <input type="text" class="form-control" id="nom_recruteur" name="nom_recruteur">
+                </div>
+            </div>
+          </div>
+          <div id="champsCommuns" style="display: none;">
+            <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                    <label class="text-black" for="fname">@Email</label>
+                    <br>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                    <label class="text-black" for="fname">Mot de passe</label>
+                    <br>
+                    <input type="password" class="form-control" id="mdp" name="mdp" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 title="Le mot de passe doit contenir 8 caractères, au moins un chiffre, au moins une lettre majuscule, au moins une lettre miniscule et un symbole spécial"
                 required>
-            <h3>Veuillez saisir notre nouveau mot de passe une seconde fois</h3>
-            <input type="password" id="mdpScndfois" name="mdpScndfois" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                    <label class="text-black" for="fname">Confirmer mot de passe</label>
+                    <br>
+                    <input type="password" class="form-control" id="mdpScndfois" name="mdpScndfois" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 required>
-            <button onclick="check()"> Je m'inscris</button>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <button onclick="check()"> Je m'inscris</button>   
+                </div>
+            </div>
+          </div>
         </div>
-
-
-
-
-
+      </div>
     </form>
-    <!-- Fonctions JavaScript -->
 
+              
+
+              
+
+           
+    
+ 
+     
+  
+  
+
+
+    <!-- SCRIPTS -->
     <script>
         function estEmployeur() {
             document.getElementById("Etudiant").checked = false
             document.getElementById("champsEtudiant").style.display = "none";
             document.getElementById("champsEntreprise").style.display = "block";
-
             document.getElementById("champsCommuns").style.display = "block";
-
         }
         function estEtudiant() {
             document.getElementById("Employeur").checked = false
             document.getElementById("champsEntreprise").style.display = "none";
             document.getElementById("champsEtudiant").style.display = "block";
-
             document.getElementById("champsCommuns").style.display = "block";
         }
-
         function check() {
-
             var mdpScnd = document.getElementById('mdpScndfois')
             var mdp = document.getElementById('mdp')
             if (mdpScnd.value != mdp.value) {
                 alert('Les deux mots de passe ne correspondent pas')
                 //input.setCustomValidity('Password Must be Matching.');
             } else {
-
                 document.getElementById("myForm").submit();
             }
         }
-
     </script>
 
 
-</body>
-
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/stickyfill.min.js"></script>
+    <script src="js/jquery.fancybox.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/quill.min.js"></script>
+    
+    
+    <script src="js/bootstrap-select.min.js"></script>
+    
+    <script src="js/custom.js"></script>
+   
+    <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" 
+    crossorigin="anonymous">
+    </script>
+     
+  </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
