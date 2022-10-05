@@ -1,101 +1,170 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title> 
-    <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+    <title>JobBoard &mdash; Website Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Free-Template.co" />
+    <link rel="shortcut icon" href="ftco-32x32.png">
+    
+    <link rel="stylesheet" href="CSS/custom-bs.css">
+    <link rel="stylesheet" href="CSS/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="CSS/bootstrap-select.min.css">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="fonts/line-icons/style.css">
+    <link rel="stylesheet" href="CSS/owl.carousel.min.css">
+    <link rel="stylesheet" href="CSS/animate.min.css">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="CSS/style.css">    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
  rel="stylesheet" 
 integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" 
 crossorigin="anonymous">
   </head>
+  <body id="top">
 
-  <body>
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-        <div class="container px-5">
-            <a class="navbar-brand" href="#page-top" style="color: black;"><img src="logo.png"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="Inscription" style="color: black;">Inscription</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Connexion" style="color: black;">Connexion</a></li>
-                </ul>
-            </div>
+
+    
+
+<div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
         </div>
-    </nav>
- 
-<header class="masthead text-center text-black">
-    <div class="masthead-content">
-        <div class="container">
-                <div class="contenant" style="  position: relative; text-align: center;">
-                    <img style="width: 100%; height: 500px" src="images/gris.jpg" alt="img">
-                    <div class="texte_center" style=" position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                        <h1 class="display-3" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">Trouvez votre emploi</h1>
-                        <h2>Un clic, tous les emplois</h2>
-                </div>
-            </div>
-       </div>
-        <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll" style="background-color:grey">Apprenez en plus !</a>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+    
 
+    <!-- NAVBAR -->
+    <header class="site-navbar mt-3">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="site-logo col-6"></div>
+
+          <nav class="mx-auto site-navigation">
+            <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
+              <li><a href="/">JOB-ATLAS</a></li>
+              <li><a href="/" class="nav-link active">Home</a></li>
+              <li class="has-children">
+                <a href="services.html">Connectez-vous</a>
+                <ul class="dropdown">
+                  <li><a href="Connexion">Connexion</a></li>
+                  <li><a href="Inscription">Inscription</a></li>
+                </ul>
+              </li>
+              <li>
+              <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
+              <div class="ml-auto">
+                <a href="Inscription" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Inscrivez-vous</a>
+                <a href="Connexion" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>S'identifier</a>
+              </div>
+            </div>
+          </li>
+            </ul>
+            
+          </nav>
+          
+          
+
+        </div>
+      </div>
     </header>
 
-     <section id="scroll">
-        <div class="container px-5">
-            <div class="row gx-5 align-items-center">
-                <div class="col-lg-6 order-lg-2">
-                    <div class="p-5"><img class="img-fluid rounded-circle" src="images/img2.jpg" alt="..." /></div>
-                </div>
-                <div class="col-lg-6 order-lg-1">
-                    <div class="p-5">
-                        <h2 class="display-4">Trouvez un emploi</h2>
-                        <p>Tout droit sorti des études? Vous voulez intégrer le marché de travail?  <br> Trouvez le parfait emploi qui répondra à vos besoins</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="scroll">
-        <!-- Content section 2-->
-        <section>
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="images/img3.jpg" alt="..." /></div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="p-5">
-                            <h2 class="display-4">Vous cherchez des employés?</h2>
-                            <p>Trouvez de nouveaux employés motivés et prêts à <br>mettre leurs compétences au service de votre entreprise</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-            <!-- Content section 3-->
-            <section>
-                <div class="container px-5">
-                    <div class="row gx-5 align-items-center">
-                        <div class="col-lg-6 order-lg-2">
-                            <div class="p-5"><img class="img-fluid rounded-circle" src="images/img1.jpg" alt="..." /></div>
-                        </div>
-                        <div class="col-lg-6 order-lg-1">
-                            <div class="p-5">
-                                <h2 class="display-4">Planifiez votre entrevue</h2>
-                                <p>Contactez l'employeur ou l'employé qui vous <br> inspire le plus afin de commencer votre <br> processus d"emnauche</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    <!-- HOME -->
+    <section class="home-section section-hero overlay bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
 
-   
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-12">
+            <div class="mb-5 text-center">
+              <h1 class="text-white font-weight-bold">Simple de trouver votre emploi de reve</h1>
+              <p>En quelques clics, toutes vos portes d'emplois s'ouvrent devant vous</p>
+            </div>
+            <div method="post" class="search-jobs-form">
+              <div class="row justify-content-center">
+                <form method="POST" class="d-flex" action="/search" role="search">
+                  <div class="col"></div>
+                <div class="col col-lg-4">
+                  <input class="form-control me-2" type="text" name ="searchTerm" onkeyup="sendData(this)" placeholder="Search" aria-label="Search">
+                </div>
+                <div class="col col-lg-2">
+                  <button class="btn btn-primary btn-lg btn-block text-white btn-search" type="submit"><span class="icon-search icon mr-2"></span>Search Job</button>
+                </div>
+                <div class="col"></div>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+    <section id="searchResults">
+
+    </section> 
+         
+  </body>
+
+        <!-- SCRIPTS -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/isotope.pkgd.min.js"></script>
+        <script src="js/stickyfill.min.js"></script>
+        <script src="js/jquery.fancybox.min.js"></script>
+        <script src="js/jquery.easing.1.3.js"></script>
+        
+        <script src="js/jquery.waypoints.min.js"></script>
+        <script src="js/jquery.animateNumber.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        
+        <script src="js/bootstrap-select.min.js"></script>
+        
+        <script src="js/custom.js"></script>
+        <script 
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" 
+        crossorigin="anonymous">
+        </script>
+    
     <script 
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" 
     crossorigin="anonymous">
+    function sendData(e){
+        const searchResults = document.getElementById('searchResults');
+        let match = e.value.match(/^[a-zA-Z]*/);
+        let match2 = e.value.match(/\s*/);
+        if(match2[0] === e.value){
+            searchResults.innerHTML = '';
+            return;
+        }
+        if(match[0]=== e.value){
+            fletch('getOffreEmploi',{
+            method: 'POST',
+            Headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({payload: e.value})
+        }).then(res => res.json()).then(data => {
+            let payload = data.payload;
+            searchResults.innerHTML = '';
+            if(payload.length < 1){
+                searchResults.innerHTML = '<p>Désolé, rien de trouvé.</p>';
+                return;
+            }
+            payload.forEach((item, index) => {
+                if(index > 0) searchResults.innerHTML += '<hr>';
+                searchResults.innerHTML += <p>${item.Titre_emploi}</p>;
+            });
+        })
+            return;
+        };
+        searchResults.innerHTML = '';
+    }
     </script>
-  </body>
-</html>
+
+    </html>
