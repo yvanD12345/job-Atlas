@@ -29,14 +29,21 @@
     "express-session": "^1.17.3",
     "flash": "^1.1.0",
     "fs": "^0.0.1-security",
+    "handlebars": "^4.7.7",
+    "html-pdf": "^3.0.1",
     "http": "^0.0.1-security",
+    "linebreak": "^1.1.0",
     "method-override": "^3.0.0",
     "mongoose": "^6.6.0",
     "node-iframe": "^1.8.5",
     "passport": "^0.6.0",
     "passport-custom": "^1.1.1",
     "passport-local": "^1.0.0",
-    "pdfkit": "^0.13.0"
+    "path": "^0.12.7",
+    "pdfkit": "^0.13.0",
+    "puppeteer": "^18.0.5",
+    "react-lineto": "^3.3.0",
+    "util": "^0.12.4"
   },
   "devDependencies": {
     "jest": "^29.0.3"

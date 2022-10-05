@@ -18,15 +18,81 @@
     <div class="form setup">
         <input type="title" class="title" name="title" placeholder="titre du cv" id="champ4" onkeyup=verifierchamp()>
     </div>
-    <div class = "form setup">
-        <button type="submit" id= "buttonB"  disabled>Créer mon CV</button>
+    <div class="form setup">
+        <input  name="postalcode" placeholder="entrer votre code postal " id="champ5" onkeyup=verifierchamp()>
     </div>
-    <div class="form-control">
-        <a class="password-forgotten" href="/resetPassword">Mot de passe oublié ?</a>
-
+    <div class="form setup">
+        <input  name="city" placeholder="entrer le nom de votre ville" id="champ6" onkeyup=verifierchamp()>
+    </div>
+    <div class="form setup">
+        <input  name="country" placeholder="entrer votre pays " id="champ7" onkeyup=verifierchamp()>
+    </div>
+    <div class="form setup">
+        <input  name="streetnumber" placeholder="entrer le numero du batiment " id="champ8" onkeyup=verifierchamp()>
+    </div>
+    <div class="form setup">
+        <input  name="streetname" placeholder="entrer le nom de votre rue " d="champ9"  onkeyup=verifierchamp()>
+    </div>
+    <div class="form setup">
+        <input  name="number" placeholder="entrer votre numero " id="champ10"  onkeyup=verifierchamp()>
+    </div>
+    <div class="experience0" id="experience0">
+        <input  name="role" placeholder="role" id="champ11" onkeyup=verifierchamp()>
+        <input  name="workPlace" placeholder="employeur" id="champ12" onkeyup=verifierchamp()>
+        <input  name="workDuties" placeholder="taches" id="champ13" onkeyup=verifierchamp()>
+    </div>
+    <div class="experience1" id="experience1" style="display: none;">
+        <input  name="role2"placeholder="role"  onkeyup=verifierchamp()>
+        <input  name="workPlace2"placeholder="employeur"  onkeyup=verifierchamp()>
+        <input  name="workDuties2"placeholder="taches"  onkeyup=verifierchamp()>
+    </div>
+    <div class="experience2" id="experience2" style="display: none;">
+        <input  name="role3" placeholder="role"  onkeyup=verifierchamp()>
+        <input  name="workPlace3"placeholder="employeur" onkeyup=verifierchamp()>
+        <input  name="workDuties3"placeholder="taches" onkeyup=verifierchamp()>
+    </div>
+    <div class="form setup">
+        <input  name="certificateName" placeholder="certificate name" id="champ14" onkeyup=verifierchamp()>
+        <input  name="optentionDate"placeholder="optention date" id="champ15" onkeyup=verifierchamp()>
+        <input  name="schoolName"placeholder="schoolName" id="champ16" onkeyup=verifierchamp()>
+    </div>
+    
+    <div class="form setup" id="certificate1" style="display:none">
+        <input  name="certificateName2" placeholder="certificate name"  onkeyup=verifierchamp()>
+        <input  name="optentionDate2"placeholder="optention date" onkeyup=verifierchamp()>
+        <input  name="schoolName2"placeholder="schoolName"  onkeyup=verifierchamp()>
+    </div>
+    
+    <div class="form setup" id="certificate2" style="display:none">
+        <input  name="certificateName3" placeholder="certificate name"  onkeyup=verifierchamp()>
+        <input  name="optentionDate3"placeholder="optention date"  onkeyup=verifierchamp()>
+        <input  name="schoolName3"placeholder="schoolName"  onkeyup=verifierchamp()>
+    </div>
+    <div class="form setup">
+        <input name="skill1" placeholder="competence 1" id="champ17" onkeyup=verifierchamp()>
+    </div>
+    <div class="form setup" id="skill1" style="display: none">
+        <input name="skill2" placeholder="competence 2"  onkeyup=verifierchamp()>
+    </div>
+    <div class="form setup"id="skill2" style="display:none">
+        <input name="skill3" placeholder="competence 3" onkeyup=verifierchamp()>
+    </div>
+    <div class="form setup">
+        <input name="langue1" placeholder="langue 1" id="champ18" onkeyup=verifierchamp()>
+    </div>
+    <div class="form setup" id="langue1" style="display:none">
+        <input name="langue2" placeholder="langue 2" onkeyup=verifierchamp()>
+    </div>
+    <div class = "form setup">
+        <button type="submit" id= "buttonB"  disabled>connexion</button>
     </div>
 </form>
+<button id="buttonexp" onclick=ajouterElementChoisi(event)>ajouter une experience</button> 
+<button id="buttoncertificate" onclick=ajouterElementChoisi(event)>ajouter un diplome</button> 
+<button id="buttonlangue" onclick=ajouterElementChoisi(event)>ajouter une langue</button> 
+<button id="buttonskill" onclick=ajouterElementChoisi(event)>ajouter un skill</button> 
 <script>
+
     function verifierchamp(){
         if(champ1.value.length > 0 && champ2.value.length > 0 && champ4.value.length > 0 && champ3.value.length > 0){
         document.getElementById("buttonB").disabled = false;
@@ -35,6 +101,77 @@
             document.getElementById("buttonB").disabled = true;
         }
     }
+    
+    let nameButton = null;
+    let categoryname = null;//categorie de l'élément choisi
+    //dictonnaire stockant l'index pour chaque type de boutton
+    //l'index sert à determiner le bon element à afficher dans la catégorie
+    
+    var dictionaryOfIndex = {
+        "experience":1,
+        "langue":1,
+        "certificate":1,
+        "skill":1
+    }
+    //affiche à l'écran l'élément que le user choisi
+    function ajouterElementChoisi(e){
+        let stringIndex = null;
+        nameButton = e.target.id;//le e est l'element qui à l'ecran qui aura dechencher la methode en l'occurence c'est le button.
+        //determine dans quelle categorie va le boutton choisi et initialise l'index string
+        if(nameButton.includes("exp")){
+           categoryname = "experience";
+           stringIndex = String(dictionaryOfIndex[categoryname]);
+        }
+        else if(nameButton.includes("certificate")){
+           categoryname = "certificate";
+           stringIndex = String(dictionaryOfIndex[categoryname]);
+        }
+        else if(nameButton.includes("langue")){
+           categoryname = "langue";
+           stringIndex = String(dictionaryOfIndex[categoryname]);
+        }
+        else if(nameButton.includes("skill")){
+           categoryname = "skill";
+           stringIndex = String(dictionaryOfIndex[categoryname]);
+        }
+        
+        //affiche à l'écran le bon élément dans la catégorie grace à categorie name et incrémente l'index de la catégorie
+        //afin que la prochaine fois que cette catégorie est choisi un autre element element apartenant à cette dernière soit ajouter
+        switch (categoryname) {
+            case "experience":
+                if(dictionaryOfIndex[categoryname] <= 2){
+                document.getElementById(categoryname+stringIndex).style.display = "block";
+                dictionaryOfIndex[categoryname]++;
+                }
+                break;
+            case "certificate":
+                if(dictionaryOfIndex[categoryname] <= 2){
+                document.getElementById(categoryname+stringIndex).style.display = "block";
+                dictionaryOfIndex[categoryname]++;
+                }
+                break;
+            case "skill": 
+                if(dictionaryOfIndex[categoryname] <= 1){
+                document.getElementById(categoryname+stringIndex).style.display = "block";
+                dictionaryOfIndex[categoryname]++;
+                }
+                break;
+             case "langue": 
+                if(dictionaryOfIndex[categoryname] <= 1){
+                document.getElementById(categoryname+stringIndex).style.display = "block";
+                dictionaryOfIndex[categoryname]++;
+                }
+                break;
+            default:
+                break;
+        }
+      
+      
+    
+    
+      
+    }
+    
 </script>
 
 </body>
