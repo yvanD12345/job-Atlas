@@ -7,6 +7,7 @@ const server = require('../server')
 const mockingoose = require('mockingoose');
 const experienceTravail = require('../models/ProfilProfessionel/experienceTravail');
 const request = require("supertest")
+const data = require('../views/resultSearch')
 
 beforeAll(async () => await db.connexion())
 afterEach(async () => await db.effacerBD())
