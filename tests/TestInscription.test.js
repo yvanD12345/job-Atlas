@@ -6,7 +6,6 @@ const Employeur = require('../models/Employeur')
 const EtudiantMethodes = require('../fonctions/creationEtudiant')
 const EmployeurMethodes = require('../fonctions/creationEmployeur')
 const experienceTravail = require('../models/ProfilProfessionel/experienceTravail');
-const request = require("supertest")
 
 beforeAll(async () => await db.connexion())
 afterEach(async () => await db.effacerBD())
