@@ -277,45 +277,14 @@ app.post('/Inscription', urlencoded, checkNotAuthenticated, (req, res) => {
 
 //ajoute les infos entrer dans la bd sous un nouveau cv
 app.post('/creationcv', checkAuthenticated, (req, res) => {
-   
     cvs.create({
         title: req.body.title,
-       first_name: req.body.firstname,
-       last_name:req.body.lastname,
-       email:req.body.email,
-       user_id:userCurrentlyLogged._id,
-       workRole1: req.body.role,
-       workPlace1:req.body.workPlace,
-       workDuties1:req.body.workDuties,
-       workRole2: req.body.role2,
-       workPlace2:req.body.workPlace2,
-       workDuties2: req.body.workDuties2,
-       workRole3:req.body.role3,
-       workPlace3:req.body.workPlace3,
-       workDuties3:req.body.workDuties3, 
-       certificateName1: req.body.certificateName,
-       certificateName2:req.body.certificateName2,
-       certificateName3: req.body.certificateName3,
-       optentiondate1:req.body.optentionDate,
-       optentiondate2:req.body.optentionDate2,
-       optentiondate3:req.body.optentionDate3,
-       schoolName1:req.body.schoolName,
-       schoolName2:req.body.schoolName1,
-       schoolName3:req.body.schoolName3, 
-       skill1:req.body.skill1,
-       skill2:req.body.skill2,
-       skill3:req.body.skill3,
-       langue1:req.body.langue1,
-       langue2:req.body.langue2,
-       postalcode:req.body.postalcode,
-       city:req.body.city,
-       country:req.body.country,
-       streetname:req.body.streetname,
-       streetnumber:req.body.streetnumber,
-       cellphone:req.body.number
-   });
-
-res.redirect('/');
+        first_name: req.body.firstname,
+        last_name: req.body.lastname,
+        email: req.body.email,
+        user_id: userCurrentlyLogged._id
+    });
+    res.redirect('/');
 });
 
 
