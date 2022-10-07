@@ -15,21 +15,12 @@ const schema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-<<<<<<< HEAD
-	user_id: {
-		type: String, required: true
-	},
-	title: {
-		type: String, required: true
-	},
-=======
     user_id : {
         type: String, required: true 
     },
     title:{
         type: String, required:true
     },
->>>>>>> parent of 36d1946 (.)
 })
 const cvs = mongoose.model("cvs", schema);
 module.exports = cvs
