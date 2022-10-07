@@ -94,7 +94,7 @@ app.get('/affichercv', checkAuthenticated, (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.redirect('Accueil')
+    res.render('Accueil')
 });
 // app.get('/', (req, res) => {
 //     res.sendFile(__dirname + './views/Accueil.ejs');
