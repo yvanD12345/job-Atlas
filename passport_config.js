@@ -30,7 +30,10 @@ function initializeE(passport, getUserByEmail, getUserByID) {
 	);
 	passport.serializeUser((user, done) => done(null, user.id));
 	passport.deserializeUser(async (id, done) => {
+<<<<<<< HEAD
 		console.log("id all good");
+=======
+>>>>>>> parent of 7945abd (commit module file part 4)
 		console.log("L'utilisateur est validé");
 		return done(null, await id);
 	});

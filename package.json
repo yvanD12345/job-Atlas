@@ -38,12 +38,16 @@
     "passport": "^0.6.0",
     "passport-custom": "^1.1.1",
     "passport-local": "^1.0.0",
+<<<<<<< HEAD
     "path": "^0.12.7",
     "pdfkit": "^0.13.0",
     "puppeteer": "^18.0.5",
     "react-lineto": "^3.3.0",
     "util": "^0.12.4",
     "supertest": "^6.3.0"
+=======
+    "pdfkit": "^0.13.0"
+>>>>>>> parent of 7945abd (commit module file part 4)
   },
   "devDependencies": {
     "jest": "^29.1.2",
