@@ -11,11 +11,7 @@ function initializeE(passport, getUserByEmail, getUserByID) {
 			});
 		}
 		try {
-<<<<<<< HEAD
-			if (bcrypt.compare(password,user.password)) {
-=======
 			if (await bcrypt.compare(password, user.password)) {
->>>>>>> parent of 7945abd (commit module file part 4)
 				return done(null, user);
 			} else {
 				return done(null, false, {
@@ -34,11 +30,8 @@ function initializeE(passport, getUserByEmail, getUserByID) {
 	);
 	passport.serializeUser((user, done) => done(null, user.id));
 	passport.deserializeUser(async (id, done) => {
-<<<<<<< HEAD
 		console.log("id all good");
-=======
 		console.log("L'utilisateur est validé");
->>>>>>> parent of 7945abd (commit module file part 4)
 		return done(null, await id);
 	});
 }
