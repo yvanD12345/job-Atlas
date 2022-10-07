@@ -26,10 +26,10 @@ const OffreEmploi = require('./models/Offre_emploi');
 const user = require('./models/User');
 
 //Import des fonctions
-const Etudiant=require('./fonctions/creationEtudiant');
-const VerifierEmail=require('./fonctions/verificationEmail');
-const Employeur=require('./fonctions/creationEmployeur');
-
+const Etudiant = require('./fonctions/creationEtudiant');
+const VerifierEmail = require('./fonctions/verificationEmail');
+const Employeur = require('./fonctions/creationEmployeur');
+const rechercheMotCle = require('./fonctions/recherche');
 
 
 //INITIALISATION VARIABLES
@@ -305,19 +305,13 @@ function escapeRegex(text) {
 };
 
 app.post('/search', async (req, res) => {
-    console.log('le search se fait')
+    console.log('le search se fait') 
+    rsltTrouves = await rechercheMotCle.rechercheMotCle(req.body.searchTerm);
+    console.log(rsltTrouves)
 
 
-    const regex = new RegExp(escapeRegex(req.body.searchTerm), 'gi');
+    res.render("resultSearch", { rsltTrouves: rsltTrouves });
 
-    OffreEmploi.find({ Titre_emploi: regex }, function (err, rsltTrouves) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(rsltTrouves)
-            res.render("resultSearch", { rsltTrouves: rsltTrouves });
-        }
-    });
 });
 
 

@@ -6,12 +6,10 @@ const Employeur = require('../models/Employeur')
 const EtudiantMethodes = require('../fonctions/creationEtudiant')
 const EmployeurMethodes = require('../fonctions/creationEmployeur')
 const experienceTravail = require('../models/ProfilProfessionel/experienceTravail');
-const request = require("supertest")
-const data = require('../views/resultSearch')
 
 beforeAll(async () => await db.connexion())
-afterEach(async () => await db.effacerBD())
-afterAll(async () => await db.deconnexionBD())
+// afterEach(async () => await db.effacerBD())
+// afterAll(async () => await db.deconnexionBD())
 
 // Le describe sert à mettre les tests similaires ensemble dans un même endroit
 //Ceci est un test régulier avec JEST
