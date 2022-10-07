@@ -86,15 +86,15 @@ app.get('/Inscription', checkNotAuthenticated, (req, res) => {
 app.get('/Accueil', checkNotAuthenticated, (req, res) => {
     res.render('Accueil')
 });
-app.get('/creationcv', checkAuthenticated, (req, res) => {
-    res.render('creationcv')
+app.get('/ProfilProfessionnel', checkAuthenticated, (req, res) => {
+    res.render('ProfilProfessionnel')
 });
 app.get('/affichercv', checkAuthenticated, (req, res) => {
     res.render('afficherCv')
 });
 
 app.get('/', (req, res) => {
-    res.redirect('Accueil')
+    res.render('Accueil')
 });
 // app.get('/', (req, res) => {
 //     res.sendFile(__dirname + './views/Accueil.ejs');
@@ -276,7 +276,7 @@ app.post('/Inscription', urlencoded, checkNotAuthenticated, (req, res) => {
 });
 
 //ajoute les infos entrer dans la bd sous un nouveau cv
-app.post('/creationcv', checkAuthenticated, (req, res) => {
+app.post('/ProfilProfessionnel', checkAuthenticated, (req, res) => {
     cvs.create({
         title: req.body.title,
         first_name: req.body.firstname,

@@ -11,7 +11,7 @@ function initializeE(passport, getUserByEmail, getUserByID) {
 			});
 		}
 		try {
-			if (bcrypt.compare(password, user.password)) {
+			if (await bcrypt.compare(password, user.password)) {
 				return done(null, user);
 			} else {
 				return done(null, false, {
@@ -30,6 +30,7 @@ function initializeE(passport, getUserByEmail, getUserByID) {
 	);
 	passport.serializeUser((user, done) => done(null, user.id));
 	passport.deserializeUser(async (id, done) => {
+		console.log("id all good");
 		console.log("L'utilisateur est validé");
 		return done(null, await id);
 	});
