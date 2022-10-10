@@ -8,6 +8,7 @@
     
     
     <link rel="stylesheet" href="css/custom-bs.css">
+    <link rel="stylesheet" href="css/navs.css">
     <link rel="stylesheet" href="css/jquery.fancybox.min.css">
     <link rel="stylesheet" href="css/bootstrap-select.min.css">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
@@ -96,12 +97,39 @@ crossorigin="anonymous">
     https://www.educba.com/bootstrap-vertical-menu/
     https://stackoverflow.com/questions/42789421/bootstrap-4-vertical-navbar
     https://www.w3schools.com/Css/css_navbar_vertical.asp
-    https://colorlib.com/wp/bootstrap-navbar/            (v19)
+
 -->
 
 
+<div class="wrapper">
+  <div class="col-2">
+  <!-- Sidebar -->
+  <nav id="sidebar">
+      
 
- <p class="title">Bonjour,<%= name %></p>
+      <ul class="list-unstyled components">
+        <li  class="active">
+          <a href="Profil">Bienvenue</a>
+        </li>
+          <li>
+              <a href="infosPersoEtudiant">Informations personnelles</a>
+          </li>
+          <li>
+              <a href="ProfilProfessionnel">Informations Professionnelles</a>
+          </li>
+          <li>
+            <a href="#">Modifier mon profil</a>
+          </li>
+          <li>
+            <a href="#">Sécurité</a>
+          </li>
+      </ul>
+  </nav>
+
+</div>
+
+<div class="col-3">
+ <h1 class="title">Bonjour,<%= name %></h1>
  <% if(ConnectedUser.user_type == "etudiant"){ %>
  <form action="afficherCv" method="POST">
     <% if( checkCvs == false){ %>
@@ -115,11 +143,14 @@ crossorigin="anonymous">
                     <%}); %>
             </select>
         </div>
+        <br>
         <%}; %>
-        <button class="submit" submit_id="buttonA">Télécharger mon CV</button>
+        <button type="submit" class="btn btn-primary border-width-2 d-none d-lg-inline-block" submit_id="buttonA">Télécharger mon CV</button>
  </form>
  <a href="ProfilProfessionnel">creer un cv</a>
  <%}; %>
+</div>
+</div>
 
  <script>
  function verifierchamp(){
