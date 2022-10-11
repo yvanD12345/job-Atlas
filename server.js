@@ -96,9 +96,9 @@ app.get('/affichercv', checkAuthenticated, (req, res) => {
 app.get('/', (req, res) => {
     res.render('Accueil')
 });
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + './views/Accueil.ejs');
-// });
+ app.get('/modificationMotDePasse', (req, res) => {
+     res.render('modificationMotDePasse')
+});
 app.get('/header', checkAuthenticated, (req, res) => {
     res.render('header')
 });
