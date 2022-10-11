@@ -201,7 +201,7 @@ app.get("/Profil", checkAuthenticated, (req, res) => {
 
 });
 
-app.get('/informationsPersonnelles', checkAuthenticated, (req, res) => {
+app.get('/infosPersoEtudiant', checkAuthenticated, (req, res) => {
 
     if (userCurrentlyLogged.user_type == "etudiant") {
         //etudiantConnecte est l'objet retrouvé
