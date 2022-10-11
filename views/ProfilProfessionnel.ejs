@@ -77,7 +77,7 @@ crossorigin="anonymous">
           </div>
         </div>
       </header>
-
+<body>
     <!-- HOME -->
     <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
       <div class="container">
@@ -111,10 +111,10 @@ crossorigin="anonymous">
         <li>
             <a href="Profil">Bienvenue</a>
           </li>
-          <li>
+          <li class="active">
               <a href="infosPersoEtudiant">Informations personnelles</a>
           </li>
-          <li class="active">
+          <li>
               <a href="ProfilProfessionnel">Informations Professionnelles</a>
           </li>
           <li>
@@ -127,49 +127,33 @@ crossorigin="anonymous">
   </nav>
 
 </div>
-<div class="col">
-    <h1>Creez votre CV</h1>
-    <form class = "register" action="/creationcv" method="POST">
 
-        <div class = "form setup">
-            <input type="email" class="form-control" name = "email" placeholder="Email" id="champ1" onkeyup=verifierchamp()>
-        </div>
+<div class="col">
+    <form action="" method="get">
+
+        <p style="display:inline-block;">Prénom: </p>
+        <label for="prenomEtudiant" style="display:inline-block;">
+            <%=user.Prenom%>
+        </label>
         <br>
-        <div class="form setup">
-            <input type="lastname" class="form-control" name="lastname" placeholder="Nom" id="champ2" onkeyup=verifierchamp()>
-        </div>
+        <p style="display:inline-block;">Nom de famille: </p>
+        <label for="nomFamilleEtudiant" style="display:inline-block;">
+            <%=user.Nom_famille%>
+        </label>
         <br>
-        <div class="form setup">
-            <input type="firstname" class="form-control" name="firstname" placeholder="Prenom" id="champ3" onkeyup=verifierchamp()>
-        </div>
+        <p style="display:inline-block;">Âge: </p>
+        <label for="ageEtudaint" style="display:inline-block;">
+            <%=user.Age%>
+        </label>
         <br>
-        <div class="form setup">
-            <input type="title" class="form-control" name="title" placeholder="Titre du cv" id="champ4" onkeyup=verifierchamp()>
-        </div>
-        <br>
-        <div class = "form setup">
-            <button type="submit" id= "buttonB" class="btn btn-primary border-width-2 d-none d-lg-inline-block" disabled>Créer mon CV</button>
-        </div>
-        <br>
-        <div class="form-control">
-            <a class="password-forgotten" href="/resetPassword">Mot de passe oublié ?</a>
-    
-        </div>
+        <p style="display:inline-block;">Email: </p>
+        <label for="emailEtudiant" style="display:inline-block;">
+            <%=user.email%>
+        </label>
+
+
     </form>
 </div>
-</div>
-<body>
-
-<script>
-    function verifierchamp(){
-        if(champ1.value.length > 0 && champ2.value.length > 0 && champ4.value.length > 0 && champ3.value.length > 0){
-        document.getElementById("buttonB").disabled = false;
-        }
-        else {
-            document.getElementById("buttonB").disabled = true;
-        }
-    }
-</script>
-
 </body>
+
 </html>
