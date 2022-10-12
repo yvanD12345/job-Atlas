@@ -108,7 +108,7 @@ crossorigin="anonymous">
       
 
       <ul class="list-unstyled components">
-        <li  class="active">
+        <li>
           <a href="Profil">Bienvenue</a>
         </li>
           <li>
@@ -117,7 +117,7 @@ crossorigin="anonymous">
           <li>
               <a href="ProfilProfessionnel">Informations Professionnelles</a>
           </li>
-          <li>
+          <li   class="active">
             <a href="modificationMotDePasse">Modifier mon profil</a>
           </li>
           <li>
@@ -129,38 +129,31 @@ crossorigin="anonymous">
 </div>
 
 <div class="col-3">
- <h1 class="title">Bonjour,<%= name %></h1>
- <% if(ConnectedUser.user_type == "etudiant"){ %>
- <form action="afficherCv" method="POST">
-    <% if( checkCvs == false){ %>
-        <div class="form-control">
-            <label for="cv ">choissisez un cv a afficher: </label>
-            <select id="champ1" name="cv_selected"onkeyup="verifierChamp()">
-                <% user_Cvs.forEach(function(item,index){%>
-                    <option value="<%=item.title %>" on>
-                        <%= item.title %>
-                    </option>
-                    <%}); %>
-            </select>
-        </div>
-        <br>
-        <%}; %>
-        <button type="submit" class="btn btn-primary border-width-2 d-none d-lg-inline-block" submit_id="buttonA">Télécharger mon CV</button>
- </form>
- <a href="ProfilProfessionnel">creer un cv</a>
- <%}; %>
-</div>
-</div>
 
- <script>
- function verifierchamp(){
-        if(champ1.value.length > 0 ){
-        document.getElementById("buttonA").disabled = false;
-        }
-        else {
-            document.getElementById("buttonA").disabled = true;
-        }
-    }
- </script>
+    <form action="'/modificationMotDePasse'" method="post">
+        <p style="display:inline-block;">Veuillez saisir votre ancien mot de passe</p><br>
+        <input type="text" name="ancienMotDepasse" class="form-control"><br>
+        <p style="display:inline-block;">Veuillez saisir votre nouveau mot de passe</p><br>
+        <input type="text" name="nouveauMotDePasse" class="form-control"><br>
+        <p style="display:inline-block;">Veuillez saisir votre nouveau mot de passe une seconde fois</p><br>
+        <input type="text" name="nouveauMotDePasseScndFois" class="form-control"><br>
+        <br>
+        <button type="submit" class="btn px-4 btn-primary text-white">Changer mon mot de passe</button>
+    </form>
+</div>
+</body>
 
 </html>
+
+<script>
+            function check() {
+            var mdpScnd = document.getElementById('mdpScndfois')
+            var mdp = document.getElementById('mdp')
+            if (mdpScnd.value != mdp.value) {
+                alert('Les deux mots de passe ne correspondent pas')
+                //input.setCustomValidity('Password Must be Matching.');
+            } else {
+                document.getElementById("myForm").submit();
+            }
+        }
+</script>

@@ -26,10 +26,10 @@ const OffreEmploi = require('./models/Offre_emploi');
 const user = require('./models/User');
 
 //Import des fonctions
-const Etudiant=require('./fonctions/creationEtudiant');
-const VerifierEmail=require('./fonctions/verificationEmail');
-const Employeur=require('./fonctions/creationEmployeur');
-
+const Etudiant = require('./fonctions/creationEtudiant');
+const VerifierEmail = require('./fonctions/verificationEmail');
+const Employeur = require('./fonctions/creationEmployeur');
+const rechercheMotCle = require('./fonctions/recherche');
 
 
 //INITIALISATION VARIABLES
@@ -96,9 +96,9 @@ app.get('/affichercv', checkAuthenticated, (req, res) => {
 app.get('/', (req, res) => {
     res.render('Accueil')
 });
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + './views/Accueil.ejs');
-// });
+ app.get('/modificationMotDePasse', (req, res) => {
+     res.render('modificationMotDePasse')
+});
 app.get('/header', checkAuthenticated, (req, res) => {
     res.render('header')
 });
@@ -201,7 +201,7 @@ app.get("/Profil", checkAuthenticated, (req, res) => {
 
 });
 
-app.get('/informationsPersonnelles', checkAuthenticated, (req, res) => {
+app.get('/infosPersoEtudiant', checkAuthenticated, (req, res) => {
 
     if (userCurrentlyLogged.user_type == "etudiant") {
         //etudiantConnecte est l'objet retrouvé
@@ -305,19 +305,13 @@ function escapeRegex(text) {
 };
 
 app.post('/search', async (req, res) => {
-    console.log('le search se fait')
+    console.log('le search se fait') 
+    rsltTrouves = await rechercheMotCle.rechercheMotCle(req.body.searchTerm);
+    console.log(rsltTrouves)
 
 
-    const regex = new RegExp(escapeRegex(req.body.searchTerm), 'gi');
+    res.render("resultSearch", { rsltTrouves: rsltTrouves });
 
-    OffreEmploi.find({ Titre_emploi: regex }, function (err, rsltTrouves) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(rsltTrouves)
-            res.render("resultSearch", { rsltTrouves: rsltTrouves });
-        }
-    });
 });
 
 
