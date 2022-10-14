@@ -45,9 +45,6 @@
     "react-lineto": "^3.3.0",
     "util": "^0.12.4",
     "supertest": "^6.3.0"
-=======
-    "pdfkit": "^0.13.0"
->>>>>>> parent of 7945abd (commit module file part 4)
   },
   "devDependencies": {
     "jest": "^29.1.2",

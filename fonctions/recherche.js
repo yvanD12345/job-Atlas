@@ -14,6 +14,7 @@ function escapeRegex(text) {
 };
 
 module.exports = {
-    rechercheMotCle: rechercheMotCle
+    rechercheMotCle: rechercheMotCle,
+    escapeRegex:escapeRegex
 
 }
