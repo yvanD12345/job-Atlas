@@ -22,7 +22,6 @@ const schema = new mongoose.Schema ({
     title:{
         type: String, required:true
     },
-<<<<<<< HEAD
 	workPlace1:{
 		type:String,
 	},
@@ -145,8 +144,6 @@ const schema = new mongoose.Schema ({
 	}
 */
 
-=======
->>>>>>> 3734c125c474799a91491ef705762dd55226cbfd
 })
 const cvs = mongoose.model("cvs", schema);
 module.exports=cvs
