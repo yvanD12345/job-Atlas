@@ -96,8 +96,8 @@ app.get('/affichercv', checkAuthenticated, (req, res) => {
 app.get('/', (req, res) => {
     res.render('Accueil')
 });
- app.get('/modificationMotDePasse', (req, res) => {
-     res.render('modificationMotDePasse')
+app.get('/modificationMotDePasse', (req, res) => {
+    res.render('modificationMotDePasse')
 });
 app.get('/header', checkAuthenticated, (req, res) => {
     res.render('header')
@@ -258,10 +258,13 @@ app.post('/Connexion', saveUserLogged, passport.authenticate('local', {
 }), async (req, res) => { });
 
 
-app.post('/Inscription', urlencoded, checkNotAuthenticated, (req, res) => {
+app.post('/Inscription', urlencoded, checkNotAuthenticated, async (req, res) => {
     var email = req.body.email;
-    if (VerifierEmail.verificationUserExistant(email) == false) {
-        console.log('user existe deja')
+    var userExiste = await VerifierEmail.verificationUserExistant(email);
+    console.log(userExiste)
+    if (userExiste) {
+        console.log('User exists')
+        res.render('/Inscription', { error: "Un utilisateur existe déjà avec ce courriel" })
     }
     else {
         if (req.body.EtudiantCheckBox == "Etudiant") {
@@ -305,7 +308,7 @@ function escapeRegex(text) {
 };
 
 app.post('/search', async (req, res) => {
-    console.log('le search se fait') 
+    console.log('le search se fait')
     rsltTrouves = await rechercheMotCle.rechercheMotCle(req.body.searchTerm);
     console.log(rsltTrouves)
 
