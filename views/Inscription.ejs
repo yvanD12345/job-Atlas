@@ -234,6 +234,34 @@ crossorigin="anonymous">
                 document.getElementById("myForm").submit();
             }
         }
+        function sendMail() {
+          var nodemailer = require('nodemailer')
+          var emailsend = req.body.email;
+          console.log(emailsend)
+
+        var transporter = nodemailer.createTransport({
+         service: 'gmail',
+        auth: {
+        user: 'jobatlas0@gmail.com',
+        pass: 'jobatlas123'
+      }
+      });
+  
+      var mailOptions = {
+      from: 'jobatlas0@gmail.com',
+      to: emailsend,
+      subject: 'Bienvenue à Job Atlas',
+      text: 'Nous sommes très heureux de vous acceuillir dans notre site et vous souhaitons bonne chance dans vos recherches'
+      };
+  
+      transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+      console.log(error);
+      } else {
+     console.log('Email sent: ' + info.response);
+     }
+     });
+  }
     </script>
 
 
